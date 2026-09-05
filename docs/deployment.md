@@ -64,7 +64,7 @@ Configure these through the platform secret/environment interface. Do not put
 their values in Git, the Dockerfile, or frontend `VITE_*` variables.
 
 ```text
-OPENROUTER_API_KEY
+DEEPSEEK_API_KEY
 ADMIN_USERNAME
 ADMIN_PASSWORD_HASH
 SESSION_SECRET

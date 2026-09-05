@@ -19,7 +19,7 @@ def test_env_example_declares_required_names_without_real_credentials() -> None:
         values[key] = value
 
     assert set(values) == {
-        "OPENROUTER_API_KEY",
+        "DEEPSEEK_API_KEY",
         "ADMIN_USERNAME",
         "ADMIN_PASSWORD_HASH",
         "SESSION_SECRET",
@@ -31,7 +31,7 @@ def test_env_example_declares_required_names_without_real_credentials() -> None:
         "MEDIA_DATA_ROOT",
         "MEDIA_UPLOAD_ROOT",
     }
-    assert values["OPENROUTER_API_KEY"] == ""
+    assert values["DEEPSEEK_API_KEY"] == ""
     assert values["ADMIN_PASSWORD_HASH"] == ""
     assert values["SESSION_SECRET"] == ""
     assert values["FRONTEND_ORIGIN"] == ""
