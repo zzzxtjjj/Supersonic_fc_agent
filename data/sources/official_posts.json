@@ -1,0 +1,39 @@
+{
+  "sources": [
+    {
+      "id": "wechat_25_26_r2",
+      "title": "赛后简报｜超音速3-4诺丁汉国际队遭遇联赛首败，吴光耀双响，张谢童甲首球",
+      "date": null,
+      "type": "official_wechat",
+      "season": "25-26"
+    },
+    {
+      "id": "wechat_25_26_r4",
+      "title": "赛后简报｜超音速4：0击败命运，取得联赛第二场胜利",
+      "date": "2026-04-08",
+      "type": "official_wechat",
+      "season": "25-26"
+    },
+    {
+      "id": "wechat_25_26_r5",
+      "title": "赛后简报｜超音速4：1击败天行者，跻身联赛第四与季后赛区",
+      "date": "2026-04-13",
+      "type": "official_wechat",
+      "season": "25-26"
+    },
+    {
+      "id": "wechat_25_26_r6",
+      "title": "赛后简报｜狭路相逢，勇者胜！超音速5：2中桌，锁定季后赛席位",
+      "date": null,
+      "type": "official_wechat",
+      "season": "25-26"
+    },
+    {
+      "id": "wechat_25_26_season_summary",
+      "title": "25-26赛季总结：离别与新生的夏天",
+      "date": null,
+      "type": "official_wechat",
+      "season": "25-26"
+    }
+  ]
+}

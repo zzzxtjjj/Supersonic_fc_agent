@@ -1,4 +1,5 @@
 import json
+import os
 import threading
 import uuid
 from dataclasses import dataclass
@@ -8,10 +9,17 @@ from typing import Any
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SEASON_DATA_ROOT = PROJECT_ROOT / "data" / "seasons"
-MEDIA_DATA_ROOT = PROJECT_ROOT / "data" / "media"
+SEASON_DATA_ROOT = Path(
+    os.getenv("SEASON_DATA_ROOT") or PROJECT_ROOT / "data" / "seasons"
+)
+MEDIA_DATA_ROOT = Path(
+    os.getenv("MEDIA_DATA_ROOT") or PROJECT_ROOT / "data" / "media"
+)
 MEDIA_INDEX_PATH = MEDIA_DATA_ROOT / "gallery.json"
-MEDIA_ROOT = Path(__file__).resolve().parent / "static" / "uploads"
+MEDIA_ROOT = Path(
+    os.getenv("MEDIA_UPLOAD_ROOT")
+    or Path(__file__).resolve().parent / "static" / "uploads"
+)
 
 ALLOWED_CATEGORIES = {"player", "team_group", "team"}
 MAX_FILE_SIZE = 10 * 1024 * 1024
@@ -146,15 +154,6 @@ def _validate_context(
         raise MediaValidationError("Team group photos cannot be assigned to players.")
 
 
-def _update_player_photos(season: str, bindings: list[tuple[str, str]]) -> None:
-    path, payload = _load_season_collection(season, "players.json", "players")
-    urls_by_player = dict(bindings)
-    for player in payload["players"]:
-        if player["id"] in urls_by_player:
-            player["photo_url"] = urls_by_player[player["id"]]
-    _write_json(path, payload)
-
-
 def _update_team_crest(season: str, team_id: str, url: str) -> None:
     path, payload = _load_season_collection(season, "teams.json", "teams")
     for team in payload["teams"]:
@@ -230,15 +229,7 @@ def store_media_batch(
             if not isinstance(current_items, list):
                 raise MediaValidationError("Media metadata index is invalid.")
 
-            if category == "player":
-                _update_player_photos(
-                    season or "",
-                    [
-                        (item["player_ids"][0], item["url"])
-                        for item in items
-                    ],
-                )
-            elif category == "team":
+            if category == "team":
                 _update_team_crest(season or "", team_id or "", items[0]["url"])
 
             _write_json(MEDIA_INDEX_PATH, current_items + items)
@@ -248,6 +239,50 @@ def store_media_batch(
         raise
 
     return items
+
+
+def set_player_avatar(
+    *,
+    season: str,
+    player_id: str,
+    media_id: str,
+) -> dict[str, Any]:
+    """Explicitly select one of a player's uploaded photos as their avatar."""
+
+    with _write_lock:
+        ensure_storage()
+        items = _read_json(MEDIA_INDEX_PATH)
+        if not isinstance(items, list):
+            raise MediaValidationError("Media metadata index is invalid.")
+
+        item = next((entry for entry in items if entry.get("id") == media_id), None)
+        if item is None:
+            raise MediaValidationError(f"Media item not found: {media_id}")
+        if item.get("type") != "player":
+            raise MediaValidationError("Only a player photo can be used as an avatar.")
+        if item.get("season") != season:
+            raise MediaValidationError("The photo does not belong to the selected season.")
+        if player_id not in item.get("player_ids", []):
+            raise MediaValidationError("The photo is not assigned to the selected player.")
+
+        path, payload = _load_season_collection(season, "players.json", "players")
+        player = next(
+            (entry for entry in payload["players"] if entry.get("id") == player_id),
+            None,
+        )
+        if player is None:
+            raise MediaValidationError(f"Unknown player id: {player_id}")
+
+        player["photo_url"] = item["url"]
+        _write_json(path, payload)
+
+    return {
+        "status": "updated",
+        "season": season,
+        "player_id": player_id,
+        "media_id": media_id,
+        "photo_url": item["url"],
+    }
 
 
 def list_media(

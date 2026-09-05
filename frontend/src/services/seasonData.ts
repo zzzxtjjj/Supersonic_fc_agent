@@ -188,7 +188,7 @@ export const seasonData = {
       rank: row.rank,
       teamId: row.team_id,
       teamName: row.team_name,
-      crestUrl: row.crest_url,
+      crestUrl: resolveMediaUrl(row.crest_url),
       points: row.points,
       goalDifference: row.goal_difference,
       goalsFor: row.goals_for,
@@ -204,7 +204,7 @@ export const seasonData = {
       rank: entry.rank,
       playerId: entry.player_id,
       playerName: entry.player_name,
-      photoUrl: entry.photo_url,
+      photoUrl: resolveMediaUrl(entry.photo_url),
       value: entry.goals,
     }))
   },

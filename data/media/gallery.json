@@ -648,5 +648,21 @@
     "date": null,
     "sort_order": null,
     "created_at": "2026-09-05T01:46:13.017846+00:00"
+  },
+  {
+    "id": "media-1d11a0d7fdb24127a26aba62aeccf012",
+    "type": "player",
+    "url": "/media/player/media-1d11a0d7fdb24127a26aba62aeccf012.jpg",
+    "original_name": "c53f749fda0550944ef8f6c362c85cdc.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "yuan-hantao"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T02:35:26.495613+00:00"
   }
 ]

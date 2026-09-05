@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend import auth, media_storage
+from backend.api import season_data
 from backend.main import app
 
 
@@ -74,6 +75,7 @@ def media_workspace(tmp_path, monkeypatch) -> dict[str, Path]:
     monkeypatch.setattr(media_storage, "MEDIA_DATA_ROOT", media_index.parent)
     monkeypatch.setattr(media_storage, "MEDIA_INDEX_PATH", media_index)
     monkeypatch.setattr(media_storage, "MEDIA_ROOT", media_root)
+    monkeypatch.setattr(season_data, "SEASON_DATA_ROOT", season_root)
 
     return {
         "player_path": player_path,
@@ -113,12 +115,21 @@ def test_public_gallery_is_available_without_login(media_workspace) -> None:
     assert response.json() == {"items": [], "total": 0}
 
 
+def test_invalid_public_gallery_category_is_a_client_error(media_workspace) -> None:
+    with TestClient(app) as client:
+        response = client.get("/api/gallery", params={"category": "unknown"})
+
+    assert response.status_code == 400
+    assert response.json() == {"detail": "Unsupported category: unknown"}
+
+
 def test_media_options_only_return_players_and_teams(media_workspace) -> None:
     with TestClient(app) as client:
         response = client.get("/api/gallery/options", params={"season": "25-26"})
 
     assert response.status_code == 200
     assert set(response.json()) == {"season", "players", "teams"}
+    assert response.json()["players"][0]["photo_url"] is None
 
 
 def test_upload_is_rejected_without_login(media_workspace) -> None:
@@ -313,7 +324,7 @@ def test_removed_photo_categories_are_rejected(
     assert "category" in response.json()["detail"].lower()
 
 
-def test_player_images_bind_to_selected_players(media_workspace) -> None:
+def test_player_image_upload_does_not_change_avatar(media_workspace) -> None:
     with TestClient(app) as client:
         assert _login(client).status_code == 200
         response = client.post(
@@ -334,8 +345,91 @@ def test_player_images_bind_to_selected_players(media_workspace) -> None:
     players = json.loads(media_workspace["player_path"].read_text(encoding="utf-8"))[
         "players"
     ]
+    assert items[0]["player_ids"] == ["player-one"]
+    assert items[1]["player_ids"] == ["player-two"]
+    assert players[0]["photo_url"] is None
+    assert players[1]["photo_url"] is None
+
+
+def test_admin_explicitly_selects_player_avatar(media_workspace) -> None:
+    with TestClient(app) as client:
+        assert _login(client).status_code == 200
+        items = client.post(
+            "/api/gallery/upload",
+            files=[
+                ("files", _image("first.png", PNG_BYTES + b"-first")),
+                ("files", _image("second.png", PNG_BYTES + b"-second")),
+            ],
+            data={
+                "category": "player",
+                "season": "25-26",
+                "player_ids": json.dumps(["player-one", "player-one"]),
+            },
+        ).json()["items"]
+
+        selected = client.put(
+            "/api/gallery/player-avatar",
+            json={
+                "season": "25-26",
+                "player_id": "player-one",
+                "media_id": items[0]["id"],
+            },
+        )
+        later_upload = client.post(
+            "/api/gallery/upload",
+            files=[("files", _image("later.png", PNG_BYTES + b"-later"))],
+            data={
+                "category": "player",
+                "season": "25-26",
+                "player_ids": json.dumps(["player-one"]),
+            },
+        )
+        options = client.get(
+            "/api/gallery/options",
+            params={"season": "25-26"},
+        )
+
+    assert selected.status_code == 200
+    assert later_upload.status_code == 201
+    assert selected.json()["photo_url"] == items[0]["url"]
+    assert options.status_code == 200
+    assert options.json()["players"][0]["photo_url"] == items[0]["url"]
+    players = json.loads(media_workspace["player_path"].read_text(encoding="utf-8"))[
+        "players"
+    ]
     assert players[0]["photo_url"] == items[0]["url"]
-    assert players[1]["photo_url"] == items[1]["url"]
+    assert players[0]["photo_url"] != items[1]["url"]
+
+
+def test_player_avatar_rejects_photo_assigned_to_another_player(
+    media_workspace,
+) -> None:
+    with TestClient(app) as client:
+        assert _login(client).status_code == 200
+        item = client.post(
+            "/api/gallery/upload",
+            files=[("files", _image("player-two.png"))],
+            data={
+                "category": "player",
+                "season": "25-26",
+                "player_ids": json.dumps(["player-two"]),
+            },
+        ).json()["items"][0]
+        response = client.put(
+            "/api/gallery/player-avatar",
+            json={
+                "season": "25-26",
+                "player_id": "player-one",
+                "media_id": item["id"],
+            },
+        )
+
+    assert response.status_code == 400
+    assert "not assigned" in response.json()["detail"].lower()
+    players = json.loads(media_workspace["player_path"].read_text(encoding="utf-8"))[
+        "players"
+    ]
+    assert players[0]["photo_url"] is None
 
 
 def test_team_crest_binds_without_overwriting_original_logo(media_workspace) -> None:
@@ -396,6 +490,15 @@ def test_admin_can_delete_uploaded_media(media_workspace) -> None:
     assert json.loads(media_workspace["media_index"].read_text(encoding="utf-8")) == []
 
 
+def test_empty_media_metadata_patch_is_a_client_error(media_workspace) -> None:
+    with TestClient(app) as client:
+        assert _login(client).status_code == 200
+        response = client.patch("/api/gallery/media-any", json={})
+
+    assert response.status_code == 400
+    assert response.json() == {"detail": "No metadata fields were supplied."}
+
+
 def test_logout_revokes_upload_permission(media_workspace) -> None:
     with TestClient(app) as client:
         assert _login(client).status_code == 200
@@ -423,6 +526,19 @@ def test_public_user_cannot_set_player_photo(media_workspace) -> None:
         )
 
     assert response.status_code == 401
+    assert media_workspace["player_path"].read_text(encoding="utf-8") == before
+
+    with TestClient(app) as client:
+        explicit_response = client.put(
+            "/api/gallery/player-avatar",
+            json={
+                "season": "25-26",
+                "player_id": "player-one",
+                "media_id": "media-nonexistent",
+            },
+        )
+
+    assert explicit_response.status_code == 401
     assert media_workspace["player_path"].read_text(encoding="utf-8") == before
 
 

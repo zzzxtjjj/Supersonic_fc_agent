@@ -86,9 +86,13 @@ export interface MediaOption {
   name: string
 }
 
+export interface MediaPlayerOption extends MediaOption {
+  photoUrl: string | null
+}
+
 export interface MediaOptions {
   season: Season
-  players: MediaOption[]
+  players: MediaPlayerOption[]
   teams: MediaOption[]
 }
 

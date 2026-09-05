@@ -1,11 +1,15 @@
 import json
+import os
 import re
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
 
-SEASON_DATA_ROOT = Path(__file__).resolve().parents[2] / "data" / "seasons"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SEASON_DATA_ROOT = Path(
+    os.getenv("SEASON_DATA_ROOT") or PROJECT_ROOT / "data" / "seasons"
+)
 SUPERSONIC_TEAM_ID = "supersonic"
 _SEASON_PATTERN = re.compile(r"^\d{2}-\d{2}$")
 
@@ -162,6 +166,8 @@ def public_player_season(
     player: dict[str, Any],
     season: str,
     goal_totals: dict[str, int],
+    *,
+    goals_available: bool = True,
 ) -> dict[str, Any]:
     season_data = player.get("season_data", {})
     return {
@@ -169,7 +175,7 @@ def public_player_season(
         "number": season_data.get("number"),
         "position": season_data.get("position"),
         "appearances": season_data.get("appearances"),
-        "goals": goal_totals.get(player["id"], 0),
+        "goals": goal_totals.get(player["id"], 0) if goals_available else None,
         "assists": season_data.get("assists"),
         "technical_profile": season_data.get("technical_profile"),
         "is_captain": season_data.get("is_captain", False),
@@ -208,8 +214,16 @@ def find_player(player_id: str) -> dict[str, Any] | None:
 
         if identity is None:
             identity = public_player(player)
-        goal_totals = calculate_player_goal_totals(load_matches(season))
-        seasons.append(public_player_season(player, season, goal_totals))
+        matches = load_matches(season)
+        goal_totals = calculate_player_goal_totals(matches)
+        seasons.append(
+            public_player_season(
+                player,
+                season,
+                goal_totals,
+                goals_available=bool(matches),
+            )
+        )
 
     if identity is None:
         return None

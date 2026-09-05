@@ -6,7 +6,7 @@ export function NotFoundPage() {
     <div className="page">
       <section className="content-wrap narrow-content">
         <EmptyState label="这个页面不存在" />
-        <Link className="text-link" to="/ai">返回 AI Agent</Link>
+        <Link className="text-link" to="/ai">返回 AI Assistant</Link>
       </section>
     </div>
   )

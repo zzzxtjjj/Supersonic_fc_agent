@@ -25,7 +25,9 @@
         "技术特点",
         "比赛风格",
         "球队角色"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -53,7 +55,9 @@
         "佩德里",
         "关键表现",
         "球队故事"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -82,7 +86,9 @@
         "技术特点",
         "比赛风格",
         "球队角色"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -110,7 +116,9 @@
         "天水球王",
         "关键表现",
         "球队故事"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -137,7 +145,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -163,7 +173,9 @@
         "技术特点",
         "比赛风格",
         "球队角色"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -188,6 +200,12 @@
         "卡位",
         "关键表现",
         "球队故事"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_r4",
+      "source_ids": [
+        "wechat_25_26_r4",
+        "wechat_25_26_r6"
       ]
     }
   },
@@ -217,7 +235,9 @@
         "技术特点",
         "比赛风格",
         "球队角色"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -245,7 +265,9 @@
         "新生杯亚军",
         "关键表现",
         "球队故事"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -269,6 +291,11 @@
         "技术特点",
         "比赛风格",
         "球队角色"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -292,6 +319,11 @@
         "终结",
         "关键表现",
         "球队故事"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_r5",
+      "source_ids": [
+        "wechat_25_26_r5"
       ]
     }
   },
@@ -313,7 +345,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -337,7 +371,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -362,7 +398,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -381,7 +419,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -405,7 +445,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -425,12 +467,17 @@
         "技术特点",
         "球队角色",
         "球队经历"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_r6",
+      "source_ids": [
+        "wechat_25_26_r6"
       ]
     }
   },
   {
     "id": "player_yuan_hantao_role_story_001",
-    "text": "袁翰涛司职中锋，锋线轮换奇兵。技术风格方面，禁区嗅觉敏锐，抢点意识出色，善于在乱战中寻找破门良机，能为球队提供不一样的进攻节奏变化。25-26 赛季，单赛季打入 1 粒联赛进球，为球队进攻端提供有效火力补充。",
+    "text": "袁翰涛来自山东东营，司职中锋，25-26赛季中期加盟超音速；此前所属球队未确认。官方赛季总结记录他为超音速打入1球。技术风格方面，禁区嗅觉与抢点意识突出，能够作为锋线轮换提供节奏变化。",
     "metadata": {
       "source": "02_球员档案.md",
       "title": "袁翰涛 - 技术角色与球队经历",
@@ -446,12 +493,17 @@
         "技术特点",
         "球队角色",
         "球队经历"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
       ]
     }
   },
   {
     "id": "player_yao_hanrong_role_story_001",
-    "text": "姚翰荣来自浙江宁波。姚翰荣可胜任后腰与右前卫。技术风格方面，脚下技术细腻，边路突破犀利，招牌式底线突破倒三角传球是球队经典进攻武器，无数次为队友创造破门机会。代表性比赛中，25-26 赛季第六轮，用一记霸气头槌打入自己四年超音速生涯的首球，成为队史经典名场面。在队史和队内地位上，超音速队史传奇球星，效力球队四年的功勋老将，球队精神象征与队魂级人物。队内尊称他为超音速传奇 Bill-y。离开球队后，毕业后远赴美国读研深造。",
+    "text": "姚翰荣来自浙江宁波，可胜任后腰与右前卫，别名 Billy、Bill-y。技术风格方面，脚下技术细腻，边路突破与底线倒三角传球能力突出。25-26 赛季第六轮，他接欧阳慷助攻打入四年超音速生涯首球。25-26赛季结束后，姚翰荣因毕业离队，去向为 New York University（纽约大学）。",
     "metadata": {
       "source": "02_球员档案.md",
       "title": "姚翰荣 - 技术角色与球队经历",
@@ -469,6 +521,12 @@
         "技术特点",
         "球队角色",
         "球队经历"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_r6",
+      "source_ids": [
+        "wechat_25_26_r6",
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -489,7 +547,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -510,6 +570,12 @@
         "技术特点",
         "球队角色",
         "球队经历"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_r5",
+      "source_ids": [
+        "wechat_25_26_r5",
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -533,7 +599,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -555,7 +623,9 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
@@ -578,12 +648,14 @@
         "技术特点",
         "球队角色",
         "球队经历"
-      ]
+      ],
+      "category": "player",
+      "source_id": null
     }
   },
   {
     "id": "player_wu_guangyao_role_story_001",
-    "text": "吴光耀的国籍是柬埔寨。吴光耀前锋。人员变动方面，赛季中期转会加盟崛起联，现为对手球队球员。效力超音速期间，第一轮完成大四喜，第二轮梅开二度，两轮比赛共轰入 6 球。",
+    "text": "吴光耀来自柬埔寨金边市，司职前锋。25-26赛季代表超音速参加的历史比赛中，他第一轮打入4球、第二轮打入2球，共留下6粒历史进球。赛季中期，吴光耀从超音速转会加盟崛起联；这些历史进球仍归入他代表超音速出场时的个人记录，但他不进入超音速25-26赛季最终队内射手榜。",
     "metadata": {
       "source": "02_球员档案.md",
       "title": "吴光耀 - 技术角色与球队经历",
@@ -597,6 +669,12 @@
         "技术特点",
         "球队角色",
         "球队经历"
+      ],
+      "category": "player",
+      "source_id": "wechat_25_26_r2",
+      "source_ids": [
+        "wechat_25_26_r2",
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -619,7 +697,9 @@
         "江苏",
         "四川",
         "甘肃"
-      ]
+      ],
+      "category": "team_history",
+      "source_id": null
     }
   },
   {
@@ -641,6 +721,11 @@
         "USC",
         "UCL",
         "NYU"
+      ],
+      "category": "team_history",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -660,7 +745,10 @@
         "常规赛第一轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": null,
+      "match_id": "25-26-regular-01"
     }
   },
   {
@@ -679,7 +767,13 @@
         "常规赛第二轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": "wechat_25_26_r2",
+      "source_ids": [
+        "wechat_25_26_r2"
+      ],
+      "match_id": "25-26-regular-02"
     }
   },
   {
@@ -698,12 +792,15 @@
         "常规赛第三轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": null,
+      "match_id": "25-26-regular-03"
     }
   },
   {
     "id": "match_25_26_round_04_001",
-    "text": "25-26 赛季常规赛第四轮，超音速 4-0 命运队。比赛结果及影响方面，胜，零封对手。这场比赛的赛季意义是：赛季转折点，止颓关键战。王恩博首开纪录，打入个人赛季首球；张谢童甲接欧阳慷角球助攻，门前蹭射破门；干宸浩任意球制造混乱，补射得分锁定胜局；一扫 0-9 惨败阴霾，止住连败，重新燃起晋级季后赛希望。本场进球贡献来自王恩博、对手乌龙（胡昊明逼抢造成）、张谢童甲、干宸浩。",
+    "text": "25-26 赛季常规赛第四轮，超音速 4-0 命运队。比赛结果及影响方面，胜，零封对手。这场比赛的赛季意义是：赛季转折点，止颓关键战。王恩博首开纪录，打入个人赛季首球；张谢童甲接欧阳慷角球助攻，门前蹭射破门；干宸浩任意球制造混乱，补射得分锁定胜局；一扫 0-9 惨败阴霾，止住低迷，重新燃起晋级季后赛希望。本场进球贡献来自王恩博、对手乌龙（胡昊明逼抢造成）、张谢童甲、干宸浩。",
     "metadata": {
       "source": "03_比赛记录.md",
       "title": "25-26 赛季常规赛第四轮 - 比赛复盘",
@@ -717,12 +814,18 @@
         "常规赛第四轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": "wechat_25_26_r4",
+      "source_ids": [
+        "wechat_25_26_r4"
+      ],
+      "match_id": "25-26-regular-04"
     }
   },
   {
     "id": "match_25_26_round_05_001",
-    "text": "25-26 赛季常规赛第五轮，超音速 4-1 天行者队。比赛结果及影响方面，胜。这场比赛的赛季意义是：冲击季后赛席位的天王山关键战。上半场雨天作战场地湿滑，两队 0-0 僵持至半场；干宸浩率先打破僵局，随后完成梅开二度；王恩博前场抢断后扛住防守球员强行破门；陈卓通过精妙任意球配合推杆破门锁定胜局；获胜后积分榜升至第四名，成功进入季后赛区，掌握晋级主动权。本场进球贡献来自干宸浩 ×2、王恩博、陈卓。",
+    "text": "25-26 赛季常规赛第五轮，超音速在雨战中 4-1 击败天行者队，升至联赛第四并进入季后赛区。干宸浩打入 2 球，其中球队第三球由谭丁睿助攻；王恩博打入 1 球且助攻未确认；陈卓打入 1 球，由姚翰荣助攻。王浩涛担任本场队长和右边后卫，王靖皓担任门将；伍瑜航、欧阳慷、张谢童甲、王恩博首发。换人包括朱余韬换下张谢童甲、谭丁睿换下王恩博、张文泽换下干宸浩。",
     "metadata": {
       "source": "03_比赛记录.md",
       "title": "25-26 赛季常规赛第五轮 - 比赛复盘",
@@ -736,12 +839,18 @@
         "常规赛第五轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": "wechat_25_26_r5",
+      "source_ids": [
+        "wechat_25_26_r5"
+      ],
+      "match_id": "25-26-regular-05"
     }
   },
   {
     "id": "match_25_26_round_06_001",
-    "text": "25-26 赛季常规赛第六轮，超音速 5-2 中桌 FC（圆桌骑士）。比赛结果及影响方面，胜，联赛三连胜。这场比赛的赛季意义是：锁定季后赛名额的荣耀之战。第一节 0-0 僵持，第二节对手率先破门，王恩博 5 分钟内扳平比分；干宸浩假射真扣晃开防守远射反超，随后打入后场长传吊射世界波；朱余韬打入个人超级联赛首球，滑跪庆祝成为赛季名场面；欧阳慷角球助攻姚翰荣头槌破门，后者收获四年超音速生涯首球；对方门将 Matthew 完成中圈发球直接射门的神奇进球；球队豪取三连胜，提前一轮锁定季后赛名额，完成从倒数第二到前四的逆袭。本场进球贡献来自王恩博、干宸浩 ×2、朱余韬、姚翰荣。",
+    "text": "25-26 赛季常规赛第六轮，超音速在 0-1 落后后逆转，以 5-2 击败中桌 FC（圆桌骑士），取得三连胜并提前锁定季后赛席位。张谢童甲担任队长。王恩博接干宸浩助攻打入 1 球，干宸浩打入 2 球，朱余韬打入个人超级联赛生涯首球，姚翰荣接欧阳慷助攻打入四年超音速生涯首球。对手进球者为郑泽曦和 Matthew。孙旭泽、潘瑞晨完成25-26赛季首秀。",
     "metadata": {
       "source": "03_比赛记录.md",
       "title": "25-26 赛季常规赛第六轮 - 比赛复盘",
@@ -755,7 +864,13 @@
         "常规赛第六轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": "wechat_25_26_r6",
+      "source_ids": [
+        "wechat_25_26_r6"
+      ],
+      "match_id": "25-26-regular-06"
     }
   },
   {
@@ -774,7 +889,10 @@
         "常规赛第七轮",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": null,
+      "match_id": "25-26-regular-07"
     }
   },
   {
@@ -793,7 +911,13 @@
         "季后赛半决赛首回合",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
+      ],
+      "match_id": "25-26-playoff-semifinal-01"
     }
   },
   {
@@ -812,7 +936,13 @@
         "季后赛半决赛次回合",
         "比赛过程",
         "战术复盘"
-      ]
+      ],
+      "category": "match_analysis",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
+      ],
+      "match_id": "25-26-playoff-semifinal-02"
     }
   },
   {
@@ -833,12 +963,17 @@
         "季后赛",
         "联赛季军",
         "队史最佳"
+      ],
+      "category": "season_summary",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
       ]
     }
   },
   {
     "id": "season_25_26_chance_creation_001",
-    "text": "25-26 赛季的机会创造体现了不同球员的战术分工：欧阳慷是队内助攻最多的球员，擅长通过定位球和角球帮助队友得分；谭丁睿在第五轮助攻干宸浩破门；张谢童甲多次通过抢断前插策动进攻；王恩博在第六轮直塞助攻干宸浩得分。球队的机会来源既包括定位球输送，也包括抢断后的快速推进和中前场直塞。",
+    "text": "25-26 赛季当前已确认的助攻事件包括：第四轮欧阳慷助攻张谢童甲；第五轮谭丁睿助攻干宸浩、姚翰荣助攻陈卓；第六轮干宸浩助攻王恩博、欧阳慷助攻姚翰荣。公众号资料没有覆盖整个赛季的全部助攻，因此不能据此生成官方完整助攻榜。",
     "metadata": {
       "source": "04_赛季数据.md",
       "title": "25-26 赛季 - 机会创造方式",
@@ -855,6 +990,13 @@
         "定位球",
         "快速推进",
         "直塞"
+      ],
+      "category": "season_summary",
+      "source_id": "wechat_25_26_r4",
+      "source_ids": [
+        "wechat_25_26_r4",
+        "wechat_25_26_r5",
+        "wechat_25_26_r6"
       ]
     }
   },
@@ -876,6 +1018,11 @@
         "三连胜",
         "季军",
         "里程碑"
+      ],
+      "category": "season_summary",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -896,7 +1043,9 @@
         "3-2-2",
         "阵地控球",
         "防守反击"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -916,7 +1065,9 @@
         "边路突破",
         "高位逼抢",
         "攻防转换"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -936,7 +1087,9 @@
         "朱余韬",
         "张谢童甲",
         "谭丁睿"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -957,7 +1110,9 @@
         "前点抢点",
         "摆渡",
         "战术角球"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -977,7 +1132,9 @@
         "干宸浩",
         "欧阳慷",
         "陈卓"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -997,7 +1154,9 @@
         "全员回防",
         "定位球防守",
         "防线沟通"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -1018,7 +1177,9 @@
         "第二节",
         "控场",
         "全线压上"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -1039,7 +1200,9 @@
         "防线沟通",
         "阵地战",
         "定位球依赖"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -1060,7 +1223,9 @@
         "中前场",
         "年轻球员",
         "冲击力"
-      ]
+      ],
+      "category": "tactics",
+      "source_id": null
     }
   },
   {
@@ -1080,7 +1245,9 @@
         "勇气",
         "亮剑",
         "不退缩"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1102,7 +1269,9 @@
         "团结",
         "坚持",
         "红色的影子"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1123,7 +1292,9 @@
         "天水球王",
         "玉面杀手",
         "Bill-y"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1143,7 +1314,9 @@
         "滑跪",
         "姚翰荣",
         "四年首球"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1163,7 +1336,9 @@
         "九位大一新生",
         "传承",
         "融入"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1182,7 +1357,9 @@
         "老牌球队",
         "红色队服",
         "球队底蕴"
-      ]
+      ],
+      "category": "team_history",
+      "source_id": null
     }
   },
   {
@@ -1202,6 +1379,11 @@
         "球队队长",
         "干宸浩",
         "张谢童甲"
+      ],
+      "category": "team_culture",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": [
+        "wechat_25_26_season_summary"
       ]
     }
   },
@@ -1221,7 +1403,9 @@
         "毕业球员",
         "大家庭",
         "归属感"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1240,7 +1424,9 @@
         "赛季总结",
         "仪式感",
         "球队记忆"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1261,7 +1447,9 @@
         "玉面杀手",
         "干宸浩",
         "欧阳慷"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
     }
   },
   {
@@ -1281,7 +1469,155 @@
         "前四",
         "全新的姿态",
         "几抹红色的影子"
-      ]
+      ],
+      "category": "team_culture",
+      "source_id": null
+    }
+  },
+  {
+    "id": "narrative_r4_turning_point_001",
+    "text": "25-26赛季常规赛第四轮前，超音速刚在上一轮0-9负于年轻人，球队士气处于低谷。随后球队4-0击败命运，完成零封并拿到赛季第二场胜利。本场进球为王恩博1球、张谢童甲1球、干宸浩1球和对手乌龙1球；张谢童甲并非梅开二度。这场比赛止住了低迷，让球队重新看到争取季后赛资格的希望，因而是赛季走势的一个重要转折点，但不是决定整个赛季的唯一因素。",
+    "metadata": {
+      "source": "wechat_25_26_r4",
+      "title": "25-26第四轮 - 从0-9低谷到4-0止颓",
+      "type": "match_analysis",
+      "topic": "r4_season_turning_point",
+      "player": null,
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "第四轮", "4-0命运", "0-9年轻人", "赛季转折点", "零封", "季后赛希望"],
+      "category": "season_turning_point",
+      "source_id": "wechat_25_26_r4",
+      "source_ids": ["wechat_25_26_r4"],
+      "match_id": "25-26-regular-04"
+    }
+  },
+  {
+    "id": "narrative_r5_playoff_race_001",
+    "text": "25-26赛季第四轮结束后，超音速与天行者只相2分，而国际后续赛程较难，因此第五轮对天行者直接影响季后赛席位竞争。超音速最终4-1取胜，并在多赛一轮的情况下升至积分榜第四、进入季后赛区。这是一场重要的争四直接对话，当时的排名仍需结合后续赛果看待。",
+    "metadata": {
+      "source": "wechat_25_26_r5",
+      "title": "25-26第五轮 - 争四关键战背景",
+      "type": "match_analysis",
+      "topic": "r5_playoff_race_context",
+      "player": null,
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "第五轮", "天行者", "争四", "季后赛席位", "积分榜第四", "4-1"],
+      "category": "match_context",
+      "source_id": "wechat_25_26_r5",
+      "source_ids": ["wechat_25_26_r5"],
+      "match_id": "25-26-regular-05"
+    }
+  },
+  {
+    "id": "narrative_r5_rain_match_story_001",
+    "text": "25-26赛季第五轮是一场雨战。第一节下雨且皮球湿滑，双方0-0收场。第二节干宸浩首开纪录，王恩博随后扩大比分，杨一辰为天行者追回一球。第三节谭丁睿替补登场后参与反击，并助攻干宸浩完成本场第二球；姚翰荣助攻陈卓将比分锁定为4-1。其他进球的助攻未获确认。",
+    "metadata": {
+      "source": "wechat_25_26_r5",
+      "title": "25-26第五轮 - 雨战4-1的比赛过程",
+      "type": "match_analysis",
+      "topic": "r5_rain_match_story",
+      "player": null,
+      "players": ["干宸浩", "王恩博", "谭丁睿", "陈卓", "姚翰荣"],
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "第五轮", "雨战", "第一节0-0", "干宸浩", "王恩博", "陈卓", "4-1天行者"],
+      "category": "match_story",
+      "source_id": "wechat_25_26_r5",
+      "source_ids": ["wechat_25_26_r5"],
+      "match_id": "25-26-regular-05"
+    }
+  },
+  {
+    "id": "narrative_r6_playoff_clinch_001",
+    "text": "25-26赛季第六轮前，超音速已取得两连胜，中桌同样是季后赛名额的直接竞争对手。比赛中超音速先0-1落后，随后完成反超并最终5-2获胜。这场逆转带来三连胜，使球队提前锁定季后赛席位，也完成了从积分榜倒数第二到进入前四的爬升。",
+    "metadata": {
+      "source": "wechat_25_26_r6",
+      "title": "25-26第六轮 - 5-2逆转提前锁定季后赛",
+      "type": "match_analysis",
+      "topic": "r6_playoff_clinch",
+      "player": null,
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "第六轮", "5-2中桌", "逆转", "三连胜", "提前锁定季后赛", "倒数第二", "前四"],
+      "category": "playoff_clinch",
+      "source_id": "wechat_25_26_r6",
+      "source_ids": ["wechat_25_26_r6"],
+      "match_id": "25-26-regular-06"
+    }
+  },
+  {
+    "id": "narrative_r6_comeback_story_001",
+    "text": "25-26赛季第六轮，超音速与中桌第一节0-0战平。第二节中桌先取得1-0领先，王恩博随后追成1-1。第三节干宸浩进球将比分反超，朱余韬打入个人超级联赛生涯首球，干宸浩再进一球。中桌追回一球后，姚翰荣头球破门，超音速最终5-2取胜。未获官方确认的助攻没有写入。",
+    "metadata": {
+      "source": "wechat_25_26_r6",
+      "title": "25-26第六轮 - 从0-1到5-2的逆转过程",
+      "type": "match_analysis",
+      "topic": "r6_comeback_match_story",
+      "player": null,
+      "players": ["王恩博", "干宸浩", "朱余韬", "姚翰荣"],
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "第六轮", "中桌", "逆转过程", "王恩博", "干宸浩", "朱余韬", "姚翰荣", "5-2"],
+      "category": "match_story",
+      "source_id": "wechat_25_26_r6",
+      "source_ids": ["wechat_25_26_r6"],
+      "match_id": "25-26-regular-06"
+    }
+  },
+  {
+    "id": "narrative_r6_player_milestones_001",
+    "text": "25-26赛季常规赛第六轮留下了四项已确认的个人里程碑：朱余韬打入个人超级联赛生涯首球；姚翰荣收获四年超音速生涯的首粒进球；孙旭泽与潘瑞晨都完成了25-26赛季首秀。这些里程碑均来自该轮官方记录，不延伸为其他生涯数据。",
+    "metadata": {
+      "source": "wechat_25_26_r6",
+      "title": "25-26第六轮 - 四项个人里程碑",
+      "type": "player",
+      "topic": "r6_player_milestones",
+      "player": null,
+      "players": ["朱余韬", "姚翰荣", "孙旭泽", "潘瑞晨"],
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "第六轮", "个人里程碑", "朱余韬联赛首球", "姚翰荣四年首球", "孙旭泽赛季首秀", "潘瑞晨赛季首秀"],
+      "category": "player_milestone",
+      "source_id": "wechat_25_26_r6",
+      "source_ids": ["wechat_25_26_r6"],
+      "match_id": "25-26-regular-06"
+    }
+  },
+  {
+    "id": "narrative_25_26_low_to_playoffs_001",
+    "text": "25-26赛季第三轮，超音速0-9负于年轻人，一度跌至积分榜倒数第二。球队随后在第四轮4-0击败命运，第五轮4-1击败天行者，第六轮又5-2逆转中桌。这段三连胜让球队从低谷重返前四，并提前获得季后赛资格，构成了该赛季最清晰的走势反转。",
+    "metadata": {
+      "source": "wechat_25_26_season_summary",
+      "title": "25-26赛季 - 从倒数第二到提前进入季后赛",
+      "type": "season_summary",
+      "topic": "low_point_to_playoffs",
+      "player": null,
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "从低谷打进季后赛", "0-9年轻人", "4-0命运", "4-1天行者", "5-2中桌", "三连胜", "倒数第二", "前四"],
+      "category": "season_story",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": ["wechat_25_26_season_summary", "wechat_25_26_r4", "wechat_25_26_r5", "wechat_25_26_r6"]
+    }
+  },
+  {
+    "id": "narrative_25_26_squad_transition_001",
+    "text": "25-26赛季是超音速阵容更新换代的一年。赛季初球队离开了多名主力，外界因此认为竞争力下降；同时球队迎来9位大一新队员，展俊杰和陈卓也在本赛季新加入。年轻球员成为球队未来的重要成员，而球队最终在新老交替过程中取得了截至官方总结时的队史最佳战绩。现有资料未明确列出9名大一队员的完整对应名单。",
+    "metadata": {
+      "source": "wechat_25_26_season_summary",
+      "title": "25-26赛季 - 阵容更新换代",
+      "type": "team_history",
+      "topic": "squad_transition",
+      "player": null,
+      "players": ["展俊杰", "陈卓"],
+      "season": "25-26",
+      "status": null,
+      "keywords": ["25-26赛季", "阵容更新换代", "9位大一新队员", "展俊杰", "陈卓", "新老交替", "队史最佳战绩"],
+      "category": "squad_transition",
+      "source_id": "wechat_25_26_season_summary",
+      "source_ids": ["wechat_25_26_season_summary"]
     }
   }
 ]

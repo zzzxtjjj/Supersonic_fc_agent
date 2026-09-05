@@ -1,20 +1,28 @@
-from agent.rag.embedder import embed_text
+from agent.rag import embedder
 from agent.rag.similarity import cosine_similarity
 
 
-text_a = "张谢童甲速度快，擅长边路突破"
+class FakeVector(list):
+    def tolist(self) -> list[float]:
+        return list(self)
 
-text_b = "张谢童甲爆发力出色，经常利用速度突破边路防线"
 
-text_c = "超音速球队文化强调团结和传承"
+class FakeEmbeddingModel:
+    def encode(self, text: str) -> FakeVector:
+        vectors = {
+            "相近文本一": FakeVector([1.0, 0.9, 0.0]),
+            "相近文本二": FakeVector([0.9, 1.0, 0.0]),
+            "无关文本": FakeVector([0.0, 0.0, 1.0]),
+        }
+        return vectors[text]
 
-vector_a = embed_text(text_a)
-vector_b = embed_text(text_b)
-vector_c = embed_text(text_c)
 
-similarity_ab = cosine_similarity(vector_a, vector_b)
+def test_embedding_similarity_without_loading_external_model(monkeypatch) -> None:
+    monkeypatch.setattr(embedder, "_model", FakeEmbeddingModel())
 
-similarity_ac = cosine_similarity(vector_a, vector_c)
+    vector_a = embedder.embed_text("相近文本一")
+    vector_b = embedder.embed_text("相近文本二")
+    vector_c = embedder.embed_text("无关文本")
 
-print("A-B:", similarity_ab)
-print("A-C:", similarity_ac)
+    assert cosine_similarity(vector_a, vector_b) > 0.99
+    assert cosine_similarity(vector_a, vector_c) == 0.0

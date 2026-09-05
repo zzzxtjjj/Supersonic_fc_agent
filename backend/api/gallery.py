@@ -18,11 +18,13 @@ from backend.api.season_data import (
 )
 from backend.auth import require_admin
 from backend.media_storage import (
+    ALLOWED_CATEGORIES,
     MAX_FILE_SIZE,
     IncomingImage,
     MediaValidationError,
     delete_media,
     list_media,
+    set_player_avatar,
     store_media_batch,
     update_media_metadata,
 )
@@ -33,6 +35,8 @@ from backend.schemas.gallery import (
     GalleryMetadataUpdate,
     GalleryUploadResponse,
     MediaOptionsResponse,
+    PlayerAvatarResponse,
+    PlayerAvatarUpdate,
 )
 
 router = APIRouter(prefix="/gallery", tags=["gallery"])
@@ -68,7 +72,14 @@ async def get_media_options(season: str) -> MediaOptionsResponse:
 
     return MediaOptionsResponse(
         season=season,
-        players=[{"id": player["id"], "name": player["name"]} for player in players],
+        players=[
+            {
+                "id": player["id"],
+                "name": player["name"],
+                "photo_url": player.get("photo_url"),
+            }
+            for player in players
+        ],
         teams=[{"id": team["id"], "name": team["name"]} for team in teams],
     )
 
@@ -81,6 +92,11 @@ async def list_gallery(
     limit: int = Query(default=100, ge=1, le=500),
     offset: int = Query(default=0, ge=0),
 ) -> GalleryListResponse:
+    if category is not None and category not in ALLOWED_CATEGORIES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Unsupported category: {category}",
+        )
     try:
         items, total = list_media(
             season=season,
@@ -146,6 +162,27 @@ async def upload_gallery_items(
     return GalleryUploadResponse(status="uploaded", items=items)
 
 
+@router.put(
+    "/player-avatar",
+    response_model=PlayerAvatarResponse,
+    dependencies=[Depends(require_admin)],
+)
+async def update_player_avatar(
+    payload: PlayerAvatarUpdate,
+) -> PlayerAvatarResponse:
+    """Select an existing player photo as the canonical player avatar."""
+
+    try:
+        result = set_player_avatar(
+            season=payload.season,
+            player_id=payload.player_id,
+            media_id=payload.media_id,
+        )
+    except MediaValidationError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
+    return PlayerAvatarResponse(**result)
+
+
 @router.patch(
     "/{media_id}",
     response_model=GalleryItem,
@@ -155,10 +192,16 @@ async def patch_gallery_item(
     media_id: str,
     payload: GalleryMetadataUpdate,
 ) -> GalleryItem:
+    changes = payload.model_dump(include=payload.model_fields_set)
+    if not changes:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No metadata fields were supplied.",
+        )
     try:
         item = update_media_metadata(
             media_id,
-            payload.model_dump(include=payload.model_fields_set),
+            changes,
         )
     except MediaValidationError as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))

@@ -6,6 +6,7 @@ import { mediaData } from '../services/mediaData'
 import type {
   MediaCategory,
   MediaOptions,
+  Photo,
   Season,
 } from '../types'
 
@@ -40,6 +41,14 @@ export function MediaAdminPage() {
   const [progress, setProgress] = useState(0)
   const [notice, setNotice] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [avatarPlayerId, setAvatarPlayerId] = useState('')
+  const [avatarPhotos, setAvatarPhotos] = useState<Photo[]>([])
+  const [selectedAvatarId, setSelectedAvatarId] = useState('')
+  const [avatarLoading, setAvatarLoading] = useState(false)
+  const [avatarSaving, setAvatarSaving] = useState(false)
+  const [avatarNotice, setAvatarNotice] = useState<string | null>(null)
+  const [avatarError, setAvatarError] = useState<string | null>(null)
+  const [mediaRevision, setMediaRevision] = useState(0)
 
   useEffect(() => {
     if (!season) {
@@ -62,6 +71,59 @@ export function MediaAdminPage() {
       })
     return () => controller.abort()
   }, [season])
+
+  useEffect(() => {
+    if (!options?.players.length) {
+      setAvatarPlayerId('')
+      return
+    }
+    setAvatarPlayerId((current) =>
+      options.players.some((player) => player.id === current)
+        ? current
+        : options.players[0].id,
+    )
+  }, [options])
+
+  useEffect(() => {
+    if (!season || !avatarPlayerId) {
+      setAvatarPhotos([])
+      setSelectedAvatarId('')
+      return
+    }
+
+    const controller = new AbortController()
+    setAvatarLoading(true)
+    setAvatarError(null)
+    mediaData
+      .getGallery(
+        { season, playerId: avatarPlayerId, category: 'player' },
+        controller.signal,
+      )
+      .then((photos) => {
+        setAvatarPhotos(photos)
+        const currentAvatarUrl = options?.players.find(
+          (player) => player.id === avatarPlayerId,
+        )?.photoUrl
+        const currentMedia = photos.find((photo) => photo.url === currentAvatarUrl)
+        setSelectedAvatarId(currentMedia?.id ?? '')
+      })
+      .catch((requestError: unknown) => {
+        if (!controller.signal.aborted) {
+          setAvatarPhotos([])
+          setSelectedAvatarId('')
+          setAvatarError(
+            requestError instanceof Error
+              ? requestError.message
+              : '无法读取该球员的照片',
+          )
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setAvatarLoading(false)
+      })
+
+    return () => controller.abort()
+  }, [avatarPlayerId, mediaRevision, options, season])
 
   function addFiles(fileList: FileList | File[]) {
     const incoming = Array.from(fileList)
@@ -153,14 +215,51 @@ export function MediaAdminPage() {
         setProgress,
       )
       setProgress(100)
-      setNotice(`已成功上传 ${uploaded.length} 张图片。`)
+      setNotice(
+        category === 'player'
+          ? `已成功上传 ${uploaded.length} 张球员照片。头像不会自动变化，请在上方“球员头像设置”中手动选择。`
+          : `已成功上传 ${uploaded.length} 张图片。`,
+      )
       clearFiles()
+      setMediaRevision((current) => current + 1)
     } catch (uploadError) {
       setError(
         uploadError instanceof Error ? uploadError.message : '图片上传失败',
       )
     } finally {
       setUploading(false)
+    }
+  }
+
+  async function savePlayerAvatar() {
+    if (!season || !avatarPlayerId || !selectedAvatarId) {
+      setAvatarError('请选择球员和一张照片。')
+      return
+    }
+    setAvatarSaving(true)
+    setAvatarError(null)
+    setAvatarNotice(null)
+    try {
+      const result = await mediaData.setPlayerAvatar({
+        season,
+        playerId: avatarPlayerId,
+        mediaId: selectedAvatarId,
+      })
+      setOptions((current) => current && ({
+        ...current,
+        players: current.players.map((player) =>
+          player.id === result.playerId
+            ? { ...player, photoUrl: result.photoUrl }
+            : player,
+        ),
+      }))
+      setAvatarNotice('头像已更新。球员列表和球员详情页刷新后会使用这张照片。')
+    } catch (saveError) {
+      setAvatarError(
+        saveError instanceof Error ? saveError.message : '头像更新失败',
+      )
+    } finally {
+      setAvatarSaving(false)
     }
   }
 
@@ -181,6 +280,84 @@ export function MediaAdminPage() {
           description="只按赛季管理球员照片、球队合照和球队队徽。"
           aside={<button className="admin-logout" type="button" onClick={logout}>退出管理</button>}
         />
+
+        <section className="avatar-manager" aria-labelledby="avatar-manager-title">
+          <div className="avatar-manager-heading">
+            <div>
+              <p className="section-kicker">PLAYER AVATAR</p>
+              <h2 id="avatar-manager-title">球员头像设置</h2>
+              <p>上传照片不会再自动替换头像。请在这里明确选择一张球员照片。</p>
+            </div>
+            <label>
+              <span>Player</span>
+              <select
+                value={avatarPlayerId}
+                onChange={(event) => {
+                  setAvatarPlayerId(event.target.value)
+                  setAvatarNotice(null)
+                  setAvatarError(null)
+                }}
+              >
+                {options?.players.map((player) => (
+                  <option key={player.id} value={player.id}>{player.name}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className="avatar-manager-body">
+            <div className="current-avatar-card">
+              <span>当前头像</span>
+              {options?.players.find((player) => player.id === avatarPlayerId)?.photoUrl ? (
+                <img
+                  src={options.players.find((player) => player.id === avatarPlayerId)?.photoUrl ?? ''}
+                  alt="当前球员头像"
+                />
+              ) : (
+                <div className="current-avatar-empty">暂无头像</div>
+              )}
+            </div>
+
+            <div className="avatar-photo-library">
+              <strong>该球员已上传的照片</strong>
+              {avatarLoading ? (
+                <p className="avatar-library-empty">正在加载照片…</p>
+              ) : avatarPhotos.length ? (
+                <div className="avatar-photo-options">
+                  {avatarPhotos.map((photo) => (
+                    <button
+                      type="button"
+                      key={photo.id}
+                      className={selectedAvatarId === photo.id ? 'selected' : ''}
+                      aria-pressed={selectedAvatarId === photo.id}
+                      onClick={() => {
+                        setSelectedAvatarId(photo.id)
+                        setAvatarNotice(null)
+                        setAvatarError(null)
+                      }}
+                    >
+                      <img src={photo.url} alt={photo.originalName} />
+                      <span>{selectedAvatarId === photo.id ? '已选择' : '选择'}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <p className="avatar-library-empty">该球员还没有上传照片。</p>
+              )}
+            </div>
+          </div>
+
+          {avatarError && <p className="upload-message error">{avatarError}</p>}
+          {avatarNotice && <p className="upload-message success">{avatarNotice}</p>}
+          <button
+            className="avatar-save-button"
+            type="button"
+            disabled={avatarSaving || !selectedAvatarId}
+            onClick={savePlayerAvatar}
+          >
+            {avatarSaving ? '保存中…' : '设为头像'}
+          </button>
+        </section>
 
         <div className="media-admin-grid">
           <section className="upload-settings">

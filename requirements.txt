@@ -1,7 +1,11 @@
 
 fastapi
+httpx
 jieba
+langgraph
 pytest
+python-dotenv
 python-multipart
+requests
 sentence-transformers
 uvicorn[standard]

@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const navItems = [
-  { to: '/ai', label: 'AI Agent' },
+  { to: '/ai', label: 'AI Assistant' },
   { to: '/gallery', label: '照片集' },
   { to: '/matches', label: '比赛' },
   { to: '/players', label: '球员' },

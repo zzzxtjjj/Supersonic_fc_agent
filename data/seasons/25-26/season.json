@@ -3,9 +3,23 @@
   "label": "25-26 赛季",
   "competition": "超级联赛",
   "status": "completed",
+  "source_ids": [
+    "wechat_25_26_season_summary"
+  ],
+  "assist_data_complete": false,
+  "lineup_data_complete": false,
   "summary": {
     "placement": "季军",
+    "regular_season": {
+      "wins": 4,
+      "losses": 3,
+      "points": 12,
+      "goals_for": 23,
+      "league_position": 4
+    },
+    "playoff_position": 3,
     "playoff_result": "止步半决赛",
+    "historical_note": "截至该官方赛季总结，25-26赛季是超音速历史最佳战绩。",
     "semifinal_aggregate": {
       "supersonic": 1,
       "opponent_team_id": "youngsters",

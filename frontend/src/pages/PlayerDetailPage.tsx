@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { EmptyState } from '../components/layout/EmptyState'
+import { PhotoTile } from '../components/gallery/PhotoTile'
 import { PlayerAvatar } from '../components/players/PlayerAvatar'
 import { SeasonSelector } from '../components/SeasonSelector'
 import { ApiError } from '../services/api'
+import { mediaData } from '../services/mediaData'
 import { seasonData } from '../services/seasonData'
-import type { PlayerDetail, Season } from '../types'
+import type { Photo, PlayerDetail, Season } from '../types'
 
 function display(value: string | number | null | undefined) {
   return value === null || value === undefined ? '暂无数据' : value
@@ -17,6 +19,9 @@ export function PlayerDetailPage() {
   const [detail, setDetail] = useState<PlayerDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [photos, setPhotos] = useState<Photo[]>([])
+  const [photosLoading, setPhotosLoading] = useState(true)
+  const [photosError, setPhotosError] = useState<string | null>(null)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -44,6 +49,34 @@ export function PlayerDetailPage() {
 
     return () => controller.abort()
   }, [id])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    setPhotosLoading(true)
+    setPhotosError(null)
+
+    mediaData
+      .getGallery(
+        { season, playerId: id, category: 'player' },
+        controller.signal,
+      )
+      .then(setPhotos)
+      .catch((requestError: unknown) => {
+        if (!controller.signal.aborted) {
+          setPhotos([])
+          setPhotosError(
+            requestError instanceof Error
+              ? `球员照片加载失败：${requestError.message}`
+              : '球员照片加载失败',
+          )
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setPhotosLoading(false)
+      })
+
+    return () => controller.abort()
+  }, [id, season])
 
   if (loading || error || !detail) {
     return (
@@ -144,7 +177,17 @@ export function PlayerDetailPage() {
                 <h2>球员照片</h2>
               </div>
             </div>
-            <EmptyState compact label="暂无球员照片" />
+            {photosLoading ? (
+              <EmptyState compact label="正在加载球员照片…" />
+            ) : photosError ? (
+              <EmptyState compact label={photosError} />
+            ) : photos.length ? (
+              <div className="player-photo-grid">
+                {photos.map((photo) => <PhotoTile key={photo.id} photo={photo} />)}
+              </div>
+            ) : (
+              <EmptyState compact label={`${season} 赛季暂无球员照片`} />
+            )}
           </section>
         </div>
       </section>

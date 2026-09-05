@@ -1,10 +1,12 @@
 import argparse
+import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+OFFICIAL_SOURCES_PATH = PROJECT_ROOT / "data" / "sources" / "official_posts.json"
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -54,6 +56,31 @@ def validate_season(season: str) -> ValidationSummary:
     standings = load_standings(season)
     errors: list[str] = []
 
+    source_payload = json.loads(OFFICIAL_SOURCES_PATH.read_text(encoding="utf-8"))
+    sources = source_payload.get("sources", [])
+    source_ids = [source.get("id") for source in sources]
+    source_id_set = set(source_ids)
+
+    if len(source_ids) != len(source_id_set):
+        errors.append("official source id 重复")
+    for source in sources:
+        if source.get("type") != "official_wechat":
+            errors.append(f"source type 非法：{source.get('id')}")
+        if source.get("season") != "25-26":
+            errors.append(f"source season 非法：{source.get('id')}")
+
+    def validate_source_ids(label: str, values: object) -> None:
+        if values is None:
+            return
+        if not isinstance(values, list):
+            errors.append(f"{label}: source_ids 必须是 list")
+            return
+        invalid = sorted(set(values) - source_id_set)
+        if invalid:
+            errors.append(f"{label}: source_id 不存在：{invalid}")
+
+    validate_source_ids("season.json", season_info.get("source_ids"))
+
     if season_info.get("id") != season:
         errors.append("season.json id 与目录赛季不一致")
 
@@ -73,9 +100,43 @@ def validate_season(season: str) -> ValidationSummary:
 
     team_id_set = set(team_ids)
     player_id_set = set(player_ids)
+    match_id_set = set(match_ids)
+
+    for player in players:
+        player_id = player.get("id", "<missing>")
+        validate_source_ids(player_id, player.get("source_ids"))
+
+        departure = player.get("departure")
+        if departure is not None:
+            source_id = departure.get("source_id")
+            if source_id not in source_id_set:
+                errors.append(f"{player_id}: departure source_id 不存在：{source_id}")
+
+        for transfer in player.get("transfers", []):
+            source_id = transfer.get("source_id")
+            if source_id not in source_id_set:
+                errors.append(f"{player_id}: transfer source_id 不存在：{source_id}")
+            for key in ("from_team_id", "to_team_id"):
+                team_id = transfer.get(key)
+                if team_id is not None and team_id not in team_id_set:
+                    errors.append(f"{player_id}: {key} 不存在：{team_id}")
+
+        for milestone in player.get("career_milestones", []):
+            source_id = milestone.get("source_id")
+            if source_id not in source_id_set:
+                errors.append(f"{player_id}: milestone source_id 不存在：{source_id}")
+            match_id = milestone.get("match_id")
+            if match_id is not None and match_id not in match_id_set:
+                errors.append(f"{player_id}: milestone match_id 不存在：{match_id}")
+
+        for award in player.get("awards", []):
+            source_id = award.get("source_id")
+            if source_id not in source_id_set:
+                errors.append(f"{player_id}: award source_id 不存在：{source_id}")
 
     for match in matches:
         match_id = match.get("id", "<missing>")
+        validate_source_ids(match_id, match.get("source_ids"))
         if match.get("season") != season:
             errors.append(f"{match_id}: season 与目录不一致")
 
@@ -106,6 +167,48 @@ def validate_season(season: str) -> ValidationSummary:
                     errors.append(f"{match_id}: own_goal 不得绑定个人 player_id")
             else:
                 errors.append(f"{match_id}: scorer type 非法：{event.get('type')}")
+
+        for key in ("captain_player_id", "goalkeeper_player_id"):
+            player_id = match.get(key)
+            if player_id is not None and player_id not in player_id_set:
+                errors.append(f"{match_id}: {key} 不存在：{player_id}")
+
+        for player_id in match.get("not_in_squad_player_ids", []):
+            if player_id not in player_id_set:
+                errors.append(f"{match_id}: not_in_squad player 不存在：{player_id}")
+
+        for lineup_fact in match.get("lineup_facts", []):
+            player_id = lineup_fact.get("player_id")
+            if player_id not in player_id_set:
+                errors.append(f"{match_id}: lineup player 不存在：{player_id}")
+
+        for milestone in match.get("milestones", []):
+            player_id = milestone.get("player_id")
+            if player_id not in player_id_set:
+                errors.append(f"{match_id}: milestone player 不存在：{player_id}")
+
+        for event in match.get("events", []):
+            event_type = event.get("type")
+            if event_type in {"goal", "own_goal"}:
+                if event.get("team_id") not in team_id_set:
+                    errors.append(
+                        f"{match_id}: event team_id 不存在：{event.get('team_id')}"
+                    )
+                for key in ("player_id", "assist_player_id", "forced_by_player_id"):
+                    player_id = event.get(key)
+                    if (
+                        player_id is not None
+                        and event.get("team_id") == "supersonic"
+                        and player_id not in player_id_set
+                    ):
+                        errors.append(f"{match_id}: event {key} 不存在：{player_id}")
+            elif event_type == "substitution":
+                for key in ("player_in_id", "player_out_id"):
+                    player_id = event.get(key)
+                    if player_id not in player_id_set:
+                        errors.append(f"{match_id}: substitution {key} 不存在：{player_id}")
+            else:
+                errors.append(f"{match_id}: event type 非法：{event_type}")
 
     for row in standings:
         if row.get("team_id") not in team_id_set:
@@ -149,11 +252,12 @@ def validate_season(season: str) -> ValidationSummary:
             "李云帆", "何柏霖", "干宸浩", "张文泽", "陈卓", "王恩博",
             "王浩涛", "姚翰荣", "谭丁睿", "朱余韬", "胡昊明", "展俊杰",
             "潘瑞晨", "伍瑜航", "吴光耀", "欧阳慷", "张谢童甲", "袁翰涛",
+            "王靖皓", "孙旭泽",
         }
         actual_roster = {player.get("name") for player in players}
-        if len(players) != 18 or actual_roster != expected_roster:
+        if len(players) != 20 or actual_roster != expected_roster:
             errors.append(
-                "25-26 球员名单应为已确认的 18 人，"
+                "25-26 球员名单应为已确认的 20 人，"
                 f"实际 {len(players)} 人"
             )
         if len(regular_matches) != 7:
@@ -167,6 +271,73 @@ def validate_season(season: str) -> ValidationSummary:
             or default_ranking[0]["goals"] != 6
         ):
             errors.append("25-26 默认射手榜第一应为干宸浩 6 球")
+
+        expected_scorers = {
+            "gan-chenhao": 6,
+            "wang-enbo": 3,
+            "zhang-xietongjia": 3,
+            "yao-hanrong": 1,
+            "tan-dingrui": 1,
+            "zhu-yutao": 1,
+            "chen-zhuo": 1,
+            "yuan-hantao": 1,
+        }
+        actual_scorers = {
+            entry["player_id"]: entry["goals"] for entry in default_ranking
+        }
+        if actual_scorers != expected_scorers:
+            errors.append(
+                f"25-26 官方最终射手榜不一致：{actual_scorers}"
+            )
+
+        if player_goal_totals.get("wu-guangyao") != 6:
+            errors.append("吴光耀代表超音速的历史进球应保留为 6 球")
+        if "wu-guangyao" in actual_scorers:
+            errors.append("吴光耀不得进入超音速25-26最终队内射手榜")
+
+        players_by_id = {player["id"]: player for player in players}
+        expected_graduates = {
+            "li-yunfan": "University of Manchester",
+            "wang-jinghao": None,
+            "wang-haotao": "The University of Hong Kong",
+            "wu-yuhang": "University of Southern California",
+            "zhang-wenze": "University College London",
+            "yao-hanrong": "New York University",
+        }
+        for player_id, destination in expected_graduates.items():
+            departure = players_by_id.get(player_id, {}).get("departure", {})
+            if (
+                departure.get("reason") != "graduation"
+                or departure.get("after_season") != "25-26"
+                or departure.get("destination") != destination
+            ):
+                errors.append(f"{player_id}: 毕业离队信息不一致")
+
+        wu_transfer = players_by_id.get("wu-guangyao", {}).get("transfers", [])
+        if not wu_transfer or (
+            wu_transfer[0].get("type") != "transfer_out"
+            or wu_transfer[0].get("timing") != "mid_season"
+            or wu_transfer[0].get("to_team_id") != "rising-union"
+        ):
+            errors.append("吴光耀 mid-season transfer-out 信息不一致")
+
+        yuan_transfer = players_by_id.get("yuan-hantao", {}).get("transfers", [])
+        if not yuan_transfer or (
+            yuan_transfer[0].get("type") != "transfer_in"
+            or yuan_transfer[0].get("timing") != "mid_season"
+            or yuan_transfer[0].get("from_team_id") is not None
+            or yuan_transfer[0].get("to_team_id") != "supersonic"
+        ):
+            errors.append("袁翰涛 mid-season transfer-in 信息不一致")
+
+    if season == "26-27":
+        captains = {
+            player["id"]
+            for player in players
+            if player.get("season_data", {}).get("is_captain") is True
+        }
+        if captains != {"gan-chenhao", "zhang-xietongjia"}:
+            errors.append(f"26-27 队长应仅为干宸浩和张谢童甲：{captains}")
 
     if errors:
         raise SeasonValidationError("赛季数据验证失败：\n- " + "\n- ".join(errors))

@@ -15,7 +15,8 @@ read from `data/seasons/<season>/`; the frontend never reads those files directl
 
 ## POST `/api/agent/chat`
 
-The Agent adapter remains intentionally unconnected.
+Runs the existing LangGraph product entry point. The request is handled outside
+the async event loop because the current Agent entry point is synchronous.
 
 **Request body**
 
@@ -25,10 +26,22 @@ The Agent adapter remains intentionally unconnected.
 
 **Query params:** none.
 
-**Future response:** `answer`, `session_id`, `sources`, and optional operational
-`tool_trace`. It must never expose reasoning, `reasoning_details`, or API keys.
+**Response:**
 
-**Status codes:** `200` future success; `422`; `501` current placeholder; `500`.
+```json
+{
+  "answer": "Agent 最终回答",
+  "session_id": "generated-or-echoed-session-id",
+  "sources": []
+}
+```
+
+The alpha endpoint is stateless: `session_id` is preserved as an API contract
+but is not injected into the Agent workflow. The public response never exposes
+messages, system prompts, tool arguments, workflow state, Evaluation trace,
+reasoning, `reasoning_details`, or API keys.
+
+**Status codes:** `200`; `422` invalid or blank message; `503` safe Agent failure.
 
 ## GET `/api/players`
 
@@ -217,7 +230,9 @@ Returns canonical player and team choices for the selected season.
 
 **Query params:** required `season`.
 
-**Response:** `{ "season": "25-26", "players": [], "teams": [] }`.
+**Response:** `{ "season": "25-26", "players": [], "teams": [] }`. Player
+options include the current nullable `photo_url` so the administrator can see
+the selected avatar.
 
 **Status codes:** `200`; `404`; `422`; `500`.
 
@@ -228,7 +243,7 @@ Returns canonical player and team choices for the selected season.
 `player_ids` (JSON array), `team_id`, `title`, `caption`, `date`, and
 `sort_order`. Player uploads require one player id per file; team-group uploads
 support multiple files without match binding; team-crest uploads require one
-file and one team.
+file and one team. Uploading player photos does not change the player's avatar.
 
 **Query params:** none.
 
@@ -238,6 +253,32 @@ file and one team.
 
 Requires an authenticated administrator session; otherwise returns `401`, or
 `403` for a valid non-admin session.
+
+## PUT `/api/gallery/player-avatar`
+
+Explicitly selects one already-uploaded player photo as the player's avatar.
+This is deliberately separate from uploading, so adding photos cannot silently
+replace the current avatar.
+
+**Request:**
+
+```json
+{
+  "season": "25-26",
+  "player_id": "player-id",
+  "media_id": "media-id"
+}
+```
+
+The media item must be a player photo from the same season and must already be
+assigned to the selected player.
+
+**Response:** includes `status`, `season`, `player_id`, `media_id`, and the
+selected `photo_url`.
+
+**Status codes:** `200`; `400`; `401`; `403`; `422`.
+
+Requires an authenticated administrator session.
 
 ## PATCH `/api/gallery/{media_id}`
 

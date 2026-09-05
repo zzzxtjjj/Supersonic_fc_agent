@@ -1,5 +1,7 @@
 {
   "season": "25-26",
+  "assist_data_complete": false,
+  "lineup_data_complete": false,
   "matches": [
     {
       "id": "25-26-regular-01",
@@ -13,6 +15,7 @@
       "away_team_id": "moonlight-knights",
       "home_score": 4,
       "away_score": 3,
+      "source_ids": ["wechat_25_26_season_summary"],
       "scorers": [
         {"type": "player", "player_id": "wu-guangyao", "player_name": "吴光耀", "goals": 4, "note": null}
       ]
@@ -29,9 +32,10 @@
       "away_team_id": "international",
       "home_score": 3,
       "away_score": 4,
+      "source_ids": ["wechat_25_26_r2"],
       "scorers": [
         {"type": "player", "player_id": "wu-guangyao", "player_name": "吴光耀", "goals": 2, "note": null},
-        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": null}
+        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": "个人超级联赛生涯首球"}
       ]
     },
     {
@@ -46,6 +50,7 @@
       "away_team_id": "youngsters",
       "home_score": 0,
       "away_score": 9,
+      "source_ids": ["wechat_25_26_season_summary"],
       "scorers": []
     },
     {
@@ -55,16 +60,24 @@
       "stage": "regular",
       "round": 4,
       "leg": null,
-      "date": null,
+      "date": "2026-04-08",
       "home_team_id": "supersonic",
       "away_team_id": "destiny",
       "home_score": 4,
       "away_score": 0,
+      "captain_player_id": "gan-chenhao",
+      "source_ids": ["wechat_25_26_r4"],
       "scorers": [
-        {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": null},
-        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": null},
-        {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 1, "note": null},
-        {"type": "own_goal", "goals": 1, "note": "胡昊明逼抢造成"}
+        {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": "个人赛季首球"},
+        {"type": "own_goal", "player_id": null, "player_name": null, "goals": 1, "forced_by_player_id": "hu-haoming", "note": "胡昊明逼抢造成"},
+        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": "个人赛季第二球"},
+        {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 1, "note": "个人赛季首球"}
+      ],
+      "events": [
+        {"type": "goal", "team_id": "supersonic", "player_id": "wang-enbo", "assist_player_id": null, "score_after": {"supersonic": 1, "opponent": 0}, "note": "个人赛季首球"},
+        {"type": "own_goal", "team_id": "supersonic", "player_id": null, "assist_player_id": null, "forced_by_player_id": "hu-haoming", "score_after": {"supersonic": 2, "opponent": 0}, "note": "命运乌龙，胡昊明逼抢造成；不计入胡昊明个人进球"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "zhang-xietongjia", "assist_player_id": "ouyang-kang", "score_after": {"supersonic": 3, "opponent": 0}, "note": "张谢童甲个人赛季第二球；欧阳慷赛季首个已确认助攻"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "gan-chenhao", "assist_player_id": null, "score_after": {"supersonic": 4, "opponent": 0}, "note": "个人赛季首球"}
       ]
     },
     {
@@ -74,15 +87,36 @@
       "stage": "regular",
       "round": 5,
       "leg": null,
-      "date": null,
+      "date": "2026-04-13",
       "home_team_id": "supersonic",
       "away_team_id": "skywalkers",
       "home_score": 4,
       "away_score": 1,
+      "captain_player_id": "wang-haotao",
+      "goalkeeper_player_id": "wang-jinghao",
+      "source_ids": ["wechat_25_26_r5"],
       "scorers": [
         {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 2, "note": null},
         {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": null},
         {"type": "player", "player_id": "chen-zhuo", "player_name": "陈卓", "goals": 1, "note": null}
+      ],
+      "events": [
+        {"type": "goal", "team_id": "supersonic", "player_id": "gan-chenhao", "assist_player_id": null, "note": "干宸浩本场第一球；助攻未确认"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "wang-enbo", "assist_player_id": null, "note": "助攻未确认"},
+        {"type": "goal", "team_id": "skywalkers", "player_id": null, "player_name": "杨一辰", "assist_player_id": null, "note": null},
+        {"type": "goal", "team_id": "supersonic", "player_id": "gan-chenhao", "assist_player_id": "tan-dingrui", "score_after": {"supersonic": 3, "opponent": 1}, "note": "谭丁睿助攻"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "chen-zhuo", "assist_player_id": "yao-hanrong", "score_after": {"supersonic": 4, "opponent": 1}, "note": "姚翰荣助攻"},
+        {"type": "substitution", "player_in_id": "zhu-yutao", "player_out_id": "zhang-xietongjia"},
+        {"type": "substitution", "player_in_id": "tan-dingrui", "player_out_id": "wang-enbo"},
+        {"type": "substitution", "player_in_id": "zhang-wenze", "player_out_id": "gan-chenhao"}
+      ],
+      "lineup_facts": [
+        {"player_id": "wu-yuhang", "starter": true, "role": null},
+        {"player_id": "ouyang-kang", "starter": true, "role": null},
+        {"player_id": "zhang-xietongjia", "starter": true, "role": null},
+        {"player_id": "wang-enbo", "starter": true, "role": null},
+        {"player_id": "wang-haotao", "starter": true, "role": "右边后卫"},
+        {"player_id": "wang-jinghao", "starter": true, "role": "门将"}
       ]
     },
     {
@@ -97,11 +131,38 @@
       "away_team_id": "round-table-knights",
       "home_score": 5,
       "away_score": 2,
+      "captain_player_id": "zhang-xietongjia",
+      "source_ids": ["wechat_25_26_r6"],
       "scorers": [
         {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": null},
         {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 2, "note": null},
-        {"type": "player", "player_id": "zhu-yutao", "player_name": "朱余韬", "goals": 1, "note": null},
-        {"type": "player", "player_id": "yao-hanrong", "player_name": "姚翰荣", "goals": 1, "note": null}
+        {"type": "player", "player_id": "zhu-yutao", "player_name": "朱余韬", "goals": 1, "note": "超级联赛生涯首球"},
+        {"type": "player", "player_id": "yao-hanrong", "player_name": "姚翰荣", "goals": 1, "note": "四年超音速生涯首球"}
+      ],
+      "events": [
+        {"type": "goal", "team_id": "round-table-knights", "player_id": null, "player_name": "郑泽曦", "assist_player_id": null, "note": "对手率先取得1-0领先"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "wang-enbo", "assist_player_id": "gan-chenhao", "note": "干宸浩助攻"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "gan-chenhao", "assist_player_id": null, "note": null},
+        {"type": "goal", "team_id": "supersonic", "player_id": "gan-chenhao", "assist_player_id": null, "note": null},
+        {"type": "goal", "team_id": "supersonic", "player_id": "zhu-yutao", "assist_player_id": null, "note": "多次封堵后的二次进攻，未确认助攻；超级联赛生涯首球"},
+        {"type": "goal", "team_id": "supersonic", "player_id": "yao-hanrong", "assist_player_id": "ouyang-kang", "note": "欧阳慷助攻；四年超音速生涯首球"},
+        {"type": "goal", "team_id": "round-table-knights", "player_id": null, "player_name": "Matthew", "assist_player_id": null, "note": null}
+      ],
+      "lineup_facts": [
+        {"player_id": "he-bolin", "starter": true, "role": "左后卫"},
+        {"player_id": "zhan-junjie", "starter": true, "role": "中后卫"},
+        {"player_id": "zhu-yutao", "starter": true, "role": "右后卫"},
+        {"player_id": "gan-chenhao", "starter": true, "role": "中场"},
+        {"player_id": "ouyang-kang", "starter": true, "role": "中场"},
+        {"player_id": "zhang-xietongjia", "starter": true, "role": "中场"},
+        {"player_id": "wang-enbo", "starter": true, "role": "中锋"}
+      ],
+      "not_in_squad_player_ids": ["wu-yuhang", "wang-haotao"],
+      "milestones": [
+        {"player_id": "zhu-yutao", "type": "first_super_league_goal", "description": "超级联赛生涯首球"},
+        {"player_id": "yao-hanrong", "type": "first_supersonic_goal", "description": "四年超音速生涯首球"},
+        {"player_id": "sun-xuze", "type": "season_debut", "description": "25-26赛季首秀"},
+        {"player_id": "pan-ruichen", "type": "season_debut", "description": "25-26赛季首秀"}
       ]
     },
     {
@@ -116,6 +177,7 @@
       "away_team_id": "rising-union",
       "home_score": 3,
       "away_score": 6,
+      "source_ids": ["wechat_25_26_season_summary"],
       "scorers": [
         {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": null},
         {"type": "player", "player_id": "tan-dingrui", "player_name": "谭丁睿", "goals": 1, "note": null},
@@ -134,6 +196,7 @@
       "away_team_id": "youngsters",
       "home_score": 0,
       "away_score": 4,
+      "source_ids": ["wechat_25_26_season_summary"],
       "scorers": []
     },
     {
@@ -148,6 +211,7 @@
       "away_team_id": "youngsters",
       "home_score": 1,
       "away_score": 3,
+      "source_ids": ["wechat_25_26_season_summary"],
       "scorers": [
         {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 1, "note": null}
       ]

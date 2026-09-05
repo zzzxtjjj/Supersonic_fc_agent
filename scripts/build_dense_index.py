@@ -43,3 +43,15 @@ def save_dense_index(index: list[dict]) -> None:
             ensure_ascii=False,
             indent=2
         )
+
+
+def main() -> int:
+    index = build_dense_index()
+    save_dense_index(index)
+    embedding_dimension = len(index[0]["embedding"]) if index else 0
+    print(f"Dense index rebuilt: {len(index)} chunks, dimension {embedding_dimension}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

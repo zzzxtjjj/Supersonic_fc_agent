@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class AgentChatRequest(BaseModel):
@@ -7,6 +7,14 @@ class AgentChatRequest(BaseModel):
     message: str = Field(min_length=1)
     session_id: str | None = None
 
+    @field_validator("message")
+    @classmethod
+    def message_must_not_be_blank(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized:
+            raise ValueError("message must not be blank")
+        return normalized
+
 
 class AgentSource(BaseModel):
     id: str
@@ -14,15 +22,7 @@ class AgentSource(BaseModel):
     source_type: str | None = None
 
 
-class ToolTraceItem(BaseModel):
-    """Optional operational trace; never contains model reasoning or secrets."""
-
-    tool_name: str
-    status: str
-
-
 class AgentChatResponse(BaseModel):
     answer: str
     session_id: str
     sources: list[AgentSource] = Field(default_factory=list)
-    tool_trace: list[ToolTraceItem] | None = None

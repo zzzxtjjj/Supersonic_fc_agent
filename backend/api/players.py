@@ -29,7 +29,8 @@ async def list_players(
 
     try:
         players = load_players(season)
-        goal_totals = calculate_player_goal_totals(load_matches(season))
+        matches = load_matches(season)
+        goal_totals = calculate_player_goal_totals(matches)
     except SeasonDataNotFound as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
 
@@ -40,7 +41,12 @@ async def list_players(
     items = [
         PlayerListItem(
             player=public_player(player),
-            season=public_player_season(player, season, goal_totals),
+            season=public_player_season(
+                player,
+                season,
+                goal_totals,
+                goals_available=bool(matches),
+            ),
         )
         for player in players[offset : offset + limit]
     ]

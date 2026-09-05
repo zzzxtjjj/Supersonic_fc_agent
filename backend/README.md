@@ -1,9 +1,10 @@
 # Backend API
 
 This package defines the future HTTP boundary for the Supersonic FC product. It
-contains season-data read APIs and local media upload/storage. Agent chat remains
-a placeholder. The backend does **not** import or invoke the existing Agent,
-LangGraph workflow, RAG retriever, or a database.
+contains season-data read APIs, local media upload/storage, and the HTTP product
+adapter for the existing LangGraph Agent. Planning, verification, recovery,
+tool routing, and retrieval remain owned by the Agent package; they are not
+reimplemented in FastAPI. No database is connected.
 
 ## Run locally
 
@@ -39,11 +40,15 @@ Images uploaded at `POST /api/gallery/upload` are stored under
 `backend/static/uploads/`; metadata is stored in `data/media/gallery.json`.
 The only upload categories are player photos (`player`), team group photos
 (`team_group`), and team crests (`team`). Media is organized by season and is
-not bound to matches. Player photos and team crests update the selected season's
+not bound to matches. Uploading a player photo only adds it to that player's
+photo library; the avatar changes only through the explicit administrator
+avatar-selection endpoint. Team crest uploads update the selected season's
 canonical JSON record.
 The existing `frontend/public/supersonic-logo.png` is never overwritten.
 
 All media writes (`POST`, `PATCH`, and `DELETE`) require the administrator
 session. Public read endpoints remain open.
 
-Agent chat remains HTTP 501 until its future adapter exists.
+Agent chat is available at `POST /api/agent/chat` and calls
+`agent.workflow.run_graph.run_graph_agent`. The public response excludes graph
+state, prompts, tool arguments, reasoning, and Evaluation trace.

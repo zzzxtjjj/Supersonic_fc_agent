@@ -23,8 +23,16 @@ interface ApiMediaItem {
 
 interface ApiMediaOptions {
   season: Season
-  players: { id: string; name: string }[]
+  players: { id: string; name: string; photo_url: string | null }[]
   teams: { id: string; name: string }[]
+}
+
+interface ApiPlayerAvatarResponse {
+  status: string
+  season: Season
+  player_id: string
+  media_id: string
+  photo_url: string
 }
 
 export interface MediaUploadInput {
@@ -81,7 +89,35 @@ export const mediaData = {
       `/gallery/options?season=${encodeURIComponent(season)}`,
       { signal },
     )
-    return response
+    return {
+      season: response.season,
+      players: response.players.map((player) => ({
+        id: player.id,
+        name: player.name,
+        photoUrl: resolveMediaUrl(player.photo_url),
+      })),
+      teams: response.teams,
+    }
+  },
+
+  async setPlayerAvatar(input: {
+    season: Season
+    playerId: string
+    mediaId: string
+  }): Promise<{ playerId: string; mediaId: string; photoUrl: string }> {
+    const response = await apiRequest<ApiPlayerAvatarResponse>('/gallery/player-avatar', {
+      method: 'PUT',
+      body: JSON.stringify({
+        season: input.season,
+        player_id: input.playerId,
+        media_id: input.mediaId,
+      }),
+    })
+    return {
+      playerId: response.player_id,
+      mediaId: response.media_id,
+      photoUrl: resolveMediaUrl(response.photo_url) ?? response.photo_url,
+    }
   },
 
   async upload(

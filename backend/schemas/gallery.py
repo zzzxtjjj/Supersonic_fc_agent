@@ -45,6 +45,7 @@ class GalleryMetadataUpdate(BaseModel):
 class MediaPlayerOption(BaseModel):
     id: str
     name: str
+    photo_url: str | None = None
 
 
 class MediaTeamOption(BaseModel):
@@ -56,3 +57,19 @@ class MediaOptionsResponse(BaseModel):
     season: str
     players: list[MediaPlayerOption] = Field(default_factory=list)
     teams: list[MediaTeamOption] = Field(default_factory=list)
+
+
+class PlayerAvatarUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    season: str
+    player_id: str
+    media_id: str
+
+
+class PlayerAvatarResponse(BaseModel):
+    status: str
+    season: str
+    player_id: str
+    media_id: str
+    photo_url: str
