@@ -1,0 +1,347 @@
+{
+  "season": "25-26",
+  "players": [
+    {
+      "id": "li-yunfan",
+      "name": "李云帆",
+      "photo_url": null,
+      "hometown": "江苏无锡",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 1,
+        "position": "门将",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "门线技术扎实，反应迅捷，出击果断，是球队后防线的重要成员。",
+        "is_captain": true,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "he-bolin",
+      "name": "何柏霖",
+      "photo_url": null,
+      "hometown": "湖南长沙",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 4,
+        "position": "左后卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "球风硬朗沉稳，卡位意识与边路一对一防守能力突出。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "gan-chenhao",
+      "name": "干宸浩",
+      "photo_url": "/media/player/media-07cf722859ba4cbaaef88733253e3cf4.jpg",
+      "hometown": "浙江嘉兴",
+      "dominant_foot": "左右脚均衡（无逆足）",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 6,
+        "position": "左前卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "脚下技术细腻扎实，远射与抢点能力突出；左右脚均衡，具备定位球与长传能力。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhang-wenze",
+      "name": "张文泽",
+      "photo_url": "/media/player/media-ab1e17e7921643c8847e59b68625198a.jpg",
+      "hometown": "浙江宁波",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 7,
+        "position": "边前卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "盘带灵动，边路突破能力突出，是球队进攻端的重要爆点。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "chen-zhuo",
+      "name": "陈卓",
+      "photo_url": "/media/player/media-fa85acb1228a456585f54b7bd56af49b.jpg",
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 8,
+        "position": "左后卫 / 后腰",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "可胜任左后卫与后腰，具备拦截、串联和出球能力。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "wang-enbo",
+      "name": "王恩博",
+      "photo_url": "/media/player/media-8b1f607252d544aebf08eb0bc0c49d68.jpg",
+      "hometown": "浙江杭州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 9,
+        "position": "中锋",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "身体对抗与支点能力突出，能够扛住防守完成终结。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "wang-haotao",
+      "name": "王浩涛",
+      "photo_url": "/media/player/media-17c461fc322f45d2a1c40ca85389ded8.jpg",
+      "hometown": "江苏苏州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 10,
+        "position": "右后卫 / 中后卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "防守经验丰富，卡位与头球能力突出，同时具备后场出球能力。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "yao-hanrong",
+      "name": "姚翰荣",
+      "photo_url": "/media/player/media-50a2568396854836a85e759a99da6887.jpg",
+      "hometown": "浙江宁波",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 11,
+        "position": "后腰 / 右前卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "脚下技术细腻，边路突破与底线倒三角传球能力突出。",
+        "is_captain": true,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "tan-dingrui",
+      "name": "谭丁睿",
+      "photo_url": "/media/player/media-a16408cd855e43b0a42a633ca147f352.jpg",
+      "hometown": "浙江杭州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 12,
+        "position": "中锋 / 中后卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "脚下技术细腻，兼具持球推进、门前终结与边路突破能力。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhu-yutao",
+      "name": "朱余韬",
+      "photo_url": "/media/player/media-d54ec02583fd4584afbfc89685906e4c.jpg",
+      "hometown": "四川成都",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 14,
+        "position": "中锋 / 边前卫 / 右后卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "可胜任多个位置，终结利落，竞技状态稳定。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "hu-haoming",
+      "name": "胡昊明",
+      "photo_url": null,
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 18,
+        "position": "前场进攻球员",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "跑动充沛，前场逼抢积极，是高位压迫的重要执行者。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhan-junjie",
+      "name": "展俊杰",
+      "photo_url": null,
+      "hometown": "江苏南京",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 19,
+        "position": "中后卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "防空与正面防守能力突出，卡位判断稳健。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "pan-ruichen",
+      "name": "潘瑞晨",
+      "photo_url": "/media/player/media-f1f8aac5a64b4644a2013bf5e9b1c012.jpg",
+      "hometown": "浙江温州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 21,
+        "position": "右后卫 / 右前卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "边路往返能力与体能突出，可参与盯防、拦截、突破和传中。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "wu-yuhang",
+      "name": "伍瑜航",
+      "photo_url": "/media/player/media-1b94bccf80884dd9832de2f0f69c12dd.jpg",
+      "hometown": "浙江宁波",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 26,
+        "position": "中后卫",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "球风硬朗，铲球与防空能力突出。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "wu-guangyao",
+      "name": "吴光耀",
+      "photo_url": "/media/player/media-5f2b299d08f54c92ae05ba861f81daaf.jpg",
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": false,
+      "season_data": {
+        "number": 29,
+        "position": "前锋",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": false,
+        "scorer_table_exclusion_reason": "赛季中期转会离队"
+      }
+    },
+    {
+      "id": "ouyang-kang",
+      "name": "欧阳慷",
+      "photo_url": "/media/player/media-46b8741362d640ea975020d950e0f000.jpg",
+      "hometown": "湖南长沙",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 33,
+        "position": "后腰",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "定位球传中精准，防守端卡位意识与拦截覆盖能力突出。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhang-xietongjia",
+      "name": "张谢童甲",
+      "photo_url": "/media/player/media-77ad9e36073f449db1a5466660fa1fff.jpg",
+      "hometown": "甘肃天水",
+      "dominant_foot": "左右脚均衡（无逆足）",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 39,
+        "position": "右前卫 / 后腰",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "爆发力与速度突出，边路突破犀利；具备拦截、长传与攻防转换能力。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "yuan-hantao",
+      "name": "袁翰涛",
+      "photo_url": "/media/player/media-5fa1cc84213b4e15acb904e5115a3d34.jpg",
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": 77,
+        "position": "中锋",
+        "appearances": null,
+        "assists": null,
+        "technical_profile": "禁区嗅觉与抢点意识突出，能够作为锋线轮换提供节奏变化。",
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    }
+  ]
+}

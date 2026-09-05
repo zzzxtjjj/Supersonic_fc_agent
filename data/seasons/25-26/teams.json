@@ -1,0 +1,76 @@
+{
+  "season": "25-26",
+  "teams": [
+    {
+      "id": "youngsters",
+      "name": "年轻人",
+      "aliases": [
+        "年轻人",
+        "年轻人队"
+      ],
+      "crest_url": null
+    },
+    {
+      "id": "rising-union",
+      "name": "崛起联",
+      "aliases": [
+        "崛起联"
+      ],
+      "crest_url": null
+    },
+    {
+      "id": "moonlight-knights",
+      "name": "月光骑士",
+      "aliases": [
+        "月光骑士"
+      ],
+      "crest_url": null
+    },
+    {
+      "id": "supersonic",
+      "name": "超音速",
+      "aliases": [
+        "超音速",
+        "Supersonic FC"
+      ],
+      "crest_url": "/supersonic-logo.png"
+    },
+    {
+      "id": "skywalkers",
+      "name": "天行者",
+      "aliases": [
+        "天行者",
+        "天行者队"
+      ],
+      "crest_url": null
+    },
+    {
+      "id": "round-table-knights",
+      "name": "圆桌骑士",
+      "aliases": [
+        "圆桌骑士",
+        "中桌 FC",
+        "中桌 FC（圆桌骑士）"
+      ],
+      "crest_url": "/media/team/media-308b3021858848ad9c9e02b1875b01fe.jpg"
+    },
+    {
+      "id": "international",
+      "name": "国际",
+      "aliases": [
+        "国际",
+        "诺丁汉国际队"
+      ],
+      "crest_url": null
+    },
+    {
+      "id": "destiny",
+      "name": "命运",
+      "aliases": [
+        "命运",
+        "命运队"
+      ],
+      "crest_url": "/media/team/media-1dcece0644ca4e0da4959966cdac5e10.jpg"
+    }
+  ]
+}

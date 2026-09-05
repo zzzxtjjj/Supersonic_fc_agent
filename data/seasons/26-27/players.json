@@ -1,0 +1,233 @@
+{
+  "season": "26-27",
+  "players": [
+    {
+      "id": "he-bolin",
+      "name": "何柏霖",
+      "photo_url": null,
+      "hometown": "湖南长沙",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "gan-chenhao",
+      "name": "干宸浩",
+      "photo_url": null,
+      "hometown": "浙江嘉兴",
+      "dominant_foot": "左右脚均衡（无逆足）",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": true,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "chen-zhuo",
+      "name": "陈卓",
+      "photo_url": null,
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "wang-enbo",
+      "name": "王恩博",
+      "photo_url": null,
+      "hometown": "浙江杭州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "tan-dingrui",
+      "name": "谭丁睿",
+      "photo_url": null,
+      "hometown": "浙江杭州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhu-yutao",
+      "name": "朱余韬",
+      "photo_url": null,
+      "hometown": "四川成都",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "hu-haoming",
+      "name": "胡昊明",
+      "photo_url": null,
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhan-junjie",
+      "name": "展俊杰",
+      "photo_url": null,
+      "hometown": "江苏南京",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "pan-ruichen",
+      "name": "潘瑞晨",
+      "photo_url": null,
+      "hometown": "浙江温州",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "ouyang-kang",
+      "name": "欧阳慷",
+      "photo_url": null,
+      "hometown": "湖南长沙",
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "zhang-xietongjia",
+      "name": "张谢童甲",
+      "photo_url": null,
+      "hometown": "甘肃天水",
+      "dominant_foot": "左右脚均衡（无逆足）",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": true,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    },
+    {
+      "id": "yuan-hantao",
+      "name": "袁翰涛",
+      "photo_url": null,
+      "hometown": null,
+      "dominant_foot": "右脚",
+      "status": null,
+      "profile_complete": true,
+      "season_data": {
+        "number": null,
+        "position": null,
+        "appearances": null,
+        "assists": null,
+        "technical_profile": null,
+        "is_captain": false,
+        "scorer_table_eligible": true,
+        "scorer_table_exclusion_reason": null
+      }
+    }
+  ]
+}

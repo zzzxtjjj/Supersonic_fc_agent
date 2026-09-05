@@ -1,0 +1,13 @@
+{
+  "season": "25-26",
+  "standings": [
+    {"rank": 1, "team_id": "youngsters", "points": 19, "goal_difference": 39, "goals_for": 41},
+    {"rank": 2, "team_id": "rising-union", "points": 16, "goal_difference": 12, "goals_for": 19},
+    {"rank": 3, "team_id": "moonlight-knights", "points": 15, "goal_difference": 23, "goals_for": 34},
+    {"rank": 4, "team_id": "supersonic", "points": 12, "goal_difference": -2, "goals_for": 23},
+    {"rank": 5, "team_id": "skywalkers", "points": 7, "goal_difference": -7, "goals_for": 21},
+    {"rank": 6, "team_id": "round-table-knights", "points": 7, "goal_difference": -15, "goals_for": 15},
+    {"rank": 7, "team_id": "international", "points": 6, "goal_difference": -16, "goals_for": 10},
+    {"rank": 8, "team_id": "destiny", "points": 0, "goal_difference": -31, "goals_for": 6}
+  ]
+}

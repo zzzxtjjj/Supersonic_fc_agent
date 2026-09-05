@@ -1,0 +1,7 @@
+
+fastapi
+jieba
+pytest
+python-multipart
+sentence-transformers
+uvicorn[standard]

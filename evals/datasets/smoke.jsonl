@@ -1,0 +1,2 @@
+{"id":"player_goals_001","category":"structured_fact","question":"张谢童甲25-26赛季进了几个球？","expected":{"answer_contains":["3"],"tool_names":["get_player_goals"]},"tags":["player","structured","25-26"]}
+{"id":"unknown_player_001","category":"recovery_clarify","question":"火星梅西25-26赛季进了几个球？","expected":{"tool_names":["get_player_goals"],"workflow_outcome":"clarify"},"tags":["player","structured","25-26","clarify"]}

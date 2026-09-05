@@ -1,0 +1,15 @@
+{
+  "id": "25-26",
+  "label": "25-26 赛季",
+  "competition": "超级联赛",
+  "status": "completed",
+  "summary": {
+    "placement": "季军",
+    "playoff_result": "止步半决赛",
+    "semifinal_aggregate": {
+      "supersonic": 1,
+      "opponent_team_id": "youngsters",
+      "opponent": 7
+    }
+  }
+}

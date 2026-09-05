@@ -1,0 +1,2 @@
+{"id":"player_technical_001","category":"rag_knowledge","question":"张谢童甲有什么技术特点？","expected":{"tool_names":["search_team_knowledge"]},"tags":["player","rag","25-26"],"needs_manual_expected":true}
+{"id":"mixed_player_001","category":"mixed_structured_rag","question":"张谢童甲25-26赛季进了几个球？他的技术特点是什么？","expected":{"answer_contains":["3"],"tool_names":["get_player_goals","search_team_knowledge"]},"tags":["player","structured","rag","25-26"],"needs_manual_expected":true}

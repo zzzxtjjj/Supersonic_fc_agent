@@ -1,0 +1,156 @@
+{
+  "season": "25-26",
+  "matches": [
+    {
+      "id": "25-26-regular-01",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 1,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "moonlight-knights",
+      "home_score": 4,
+      "away_score": 3,
+      "scorers": [
+        {"type": "player", "player_id": "wu-guangyao", "player_name": "吴光耀", "goals": 4, "note": null}
+      ]
+    },
+    {
+      "id": "25-26-regular-02",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 2,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "international",
+      "home_score": 3,
+      "away_score": 4,
+      "scorers": [
+        {"type": "player", "player_id": "wu-guangyao", "player_name": "吴光耀", "goals": 2, "note": null},
+        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": null}
+      ]
+    },
+    {
+      "id": "25-26-regular-03",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 3,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "youngsters",
+      "home_score": 0,
+      "away_score": 9,
+      "scorers": []
+    },
+    {
+      "id": "25-26-regular-04",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 4,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "destiny",
+      "home_score": 4,
+      "away_score": 0,
+      "scorers": [
+        {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": null},
+        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": null},
+        {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 1, "note": null},
+        {"type": "own_goal", "goals": 1, "note": "胡昊明逼抢造成"}
+      ]
+    },
+    {
+      "id": "25-26-regular-05",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 5,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "skywalkers",
+      "home_score": 4,
+      "away_score": 1,
+      "scorers": [
+        {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 2, "note": null},
+        {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": null},
+        {"type": "player", "player_id": "chen-zhuo", "player_name": "陈卓", "goals": 1, "note": null}
+      ]
+    },
+    {
+      "id": "25-26-regular-06",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 6,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "round-table-knights",
+      "home_score": 5,
+      "away_score": 2,
+      "scorers": [
+        {"type": "player", "player_id": "wang-enbo", "player_name": "王恩博", "goals": 1, "note": null},
+        {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 2, "note": null},
+        {"type": "player", "player_id": "zhu-yutao", "player_name": "朱余韬", "goals": 1, "note": null},
+        {"type": "player", "player_id": "yao-hanrong", "player_name": "姚翰荣", "goals": 1, "note": null}
+      ]
+    },
+    {
+      "id": "25-26-regular-07",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "regular",
+      "round": 7,
+      "leg": null,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "rising-union",
+      "home_score": 3,
+      "away_score": 6,
+      "scorers": [
+        {"type": "player", "player_id": "zhang-xietongjia", "player_name": "张谢童甲", "goals": 1, "note": null},
+        {"type": "player", "player_id": "tan-dingrui", "player_name": "谭丁睿", "goals": 1, "note": null},
+        {"type": "player", "player_id": "yuan-hantao", "player_name": "袁翰涛", "goals": 1, "note": null}
+      ]
+    },
+    {
+      "id": "25-26-playoff-semifinal-01",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "playoff_semifinal",
+      "round": null,
+      "leg": 1,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "youngsters",
+      "home_score": 0,
+      "away_score": 4,
+      "scorers": []
+    },
+    {
+      "id": "25-26-playoff-semifinal-02",
+      "season": "25-26",
+      "competition": "超级联赛",
+      "stage": "playoff_semifinal",
+      "round": null,
+      "leg": 2,
+      "date": null,
+      "home_team_id": "supersonic",
+      "away_team_id": "youngsters",
+      "home_score": 1,
+      "away_score": 3,
+      "scorers": [
+        {"type": "player", "player_id": "gan-chenhao", "player_name": "干宸浩", "goals": 1, "note": null}
+      ]
+    }
+  ]
+}
