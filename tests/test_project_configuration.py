@@ -83,6 +83,6 @@ def test_runtime_storage_initializes_persistent_directories(
     )["teams"]
     assert all(not str(player.get("photo_url") or "").startswith("/media/") for player in players)
     assert all(not str(team.get("crest_url") or "").startswith("/media/") for team in teams)
-    assert next(team for team in teams if team["id"] == "supersonic")["crest_url"] == "/supersonic-logo.png"
+    assert all(str(team.get("crest_url") or "").startswith("/team-crests/") for team in teams)
     assert (media_root / "gallery.json").read_text(encoding="utf-8") == "[]\n"
     assert uploads_root.is_dir()

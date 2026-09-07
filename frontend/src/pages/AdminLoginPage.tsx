@@ -31,7 +31,7 @@ export function AdminLoginPage() {
       await adminAuth.login(username, password)
       const destination = (
         location.state as { from?: string } | null
-      )?.from ?? '/admin/media'
+      )?.from ?? '/admin'
       navigate(destination, { replace: true })
     } catch (loginError) {
       setError(
@@ -45,7 +45,7 @@ export function AdminLoginPage() {
   }
 
   if (!checking && authenticated) {
-    return <Navigate to="/admin/media" replace />
+    return <Navigate to="/admin" replace />
   }
 
   return (
@@ -54,7 +54,7 @@ export function AdminLoginPage() {
         <img src="/supersonic-logo.png" alt="超音速球队队徽" />
         <p className="section-kicker">PRIVATE ADMIN</p>
         <h1>管理员登录</h1>
-        <p>仅用于本地媒体管理。网站没有公开注册。</p>
+        <p>用于球队数据、比赛事件与媒体管理。网站没有公开注册。</p>
 
         <form onSubmit={submit}>
           <label>

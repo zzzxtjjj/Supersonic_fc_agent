@@ -96,15 +96,22 @@ def test_supersonic_standing_is_exact() -> None:
 def test_team_aliases_and_media_contracts() -> None:
     teams = {team["id"]: team for team in load_teams("25-26")}
     players = load_players("25-26")
+    expected_crests = {
+        "moonlight-knights": "/team-crests/moonlight-knights.png",
+        "destiny": "/team-crests/destiny.png",
+        "skywalkers": "/team-crests/skywalkers.png",
+        "round-table-knights": "/team-crests/round-table-knights.png",
+        "supersonic": "/team-crests/supersonic.png",
+        "youngsters": "/team-crests/youngsters.png",
+        "international": "/team-crests/international.jpg",
+        "rising-union": "/team-crests/rising-union.jpg",
+    }
 
     assert "诺丁汉国际队" in teams["international"]["aliases"]
     assert "中桌 FC（圆桌骑士）" in teams["round-table-knights"]["aliases"]
-    assert teams["supersonic"]["crest_url"] == "/supersonic-logo.png"
-    assert all(
-        team["crest_url"] is None or team["crest_url"].startswith("/media/team/")
-        for team_id, team in teams.items()
-        if team_id != "supersonic"
-    )
+    assert {team_id: team["crest_url"] for team_id, team in teams.items()} == expected_crests
+    public_root = Path(__file__).resolve().parents[1] / "frontend" / "public"
+    assert all((public_root / crest.lstrip("/")).is_file() for crest in expected_crests.values())
     assert all("photo_url" in player for player in players)
 
 

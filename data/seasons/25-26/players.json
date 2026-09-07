@@ -4,7 +4,7 @@
     {
       "id": "li-yunfan",
       "name": "李云帆",
-      "photo_url": null,
+      "photo_url": "/media/player/media-fe80a699a1f04a029e72d4f54b75c9ec.jpg",
       "hometown": "江苏无锡",
       "dominant_foot": "右脚",
       "status": "graduated",
@@ -33,7 +33,7 @@
     {
       "id": "he-bolin",
       "name": "何柏霖",
-      "photo_url": null,
+      "photo_url": "/media/player/media-1141f3a10d86410690d30551b6248170.jpg",
       "hometown": "湖南长沙",
       "dominant_foot": "右脚",
       "status": null,
@@ -212,7 +212,7 @@
     {
       "id": "tan-dingrui",
       "name": "谭丁睿",
-      "photo_url": "/media/player/media-a16408cd855e43b0a42a633ca147f352.jpg",
+      "photo_url": "/media/player/media-cff8a634613b4d4f84f393468506cd50.jpg",
       "hometown": "浙江杭州",
       "dominant_foot": "右脚",
       "status": null,
@@ -279,7 +279,7 @@
     {
       "id": "zhan-junjie",
       "name": "展俊杰",
-      "photo_url": null,
+      "photo_url": "/media/player/media-2f80213fd764414bba7040fa4e7083d1.jpg",
       "hometown": "江苏南京",
       "dominant_foot": "右脚",
       "status": null,
@@ -381,7 +381,7 @@
     {
       "id": "ouyang-kang",
       "name": "欧阳慷",
-      "photo_url": "/media/player/media-46b8741362d640ea975020d950e0f000.jpg",
+      "photo_url": "/media/player/media-49ce4a9c4ffc47e38c25a1916f61ef82.jpg",
       "hometown": "湖南长沙",
       "dominant_foot": "右脚",
       "status": null,
@@ -419,7 +419,7 @@
     {
       "id": "yuan-hantao",
       "name": "袁翰涛",
-      "photo_url": "/media/player/media-d3072c91d1a9440782475d1a7a3a2854.jpg",
+      "photo_url": "/media/player/media-ef9aae2ef64f4c1393a3a05ed62f5b36.jpg",
       "hometown": "山东东营",
       "dominant_foot": "右脚",
       "status": null,

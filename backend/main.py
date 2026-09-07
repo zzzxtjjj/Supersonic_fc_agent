@@ -8,7 +8,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from backend.api import admin, agent, gallery, matches, players, stats
+from backend.api import (
+    admin,
+    admin_data,
+    agent,
+    gallery,
+    matches,
+    player_auth,
+    players,
+    ratings,
+    stats,
+)
 from backend.media_storage import MEDIA_ROOT
 
 
@@ -85,11 +95,14 @@ async def health_check() -> dict[str, str]:
 
 for router in (
     admin.router,
+    admin_data.router,
     agent.router,
     players.router,
     matches.router,
+    player_auth.router,
     stats.router,
     gallery.router,
+    ratings.router,
 ):
     app.include_router(router, prefix="/api")
 

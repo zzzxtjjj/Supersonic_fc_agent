@@ -183,16 +183,22 @@ button {
   width: 42px;
   height: 42px;
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--brand-yellow);
   border-radius: 10px;
-  background: transparent;
+  background: var(--brand-yellow);
+  cursor: pointer;
 }
 
 .menu-toggle span {
   display: block;
   height: 2px;
   margin: 4px 0;
-  background: #fff;
+  background: var(--brand-blue-deep);
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+  background: var(--brand-yellow-soft);
 }
 
 main {
@@ -972,13 +978,14 @@ main {
 }
 
 .team-crest {
+  position: relative;
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
   overflow: hidden;
   border: 1px solid rgba(36, 74, 131, 0.2);
-  border-radius: 10px;
-  background: #f4f7f8;
+  border-radius: 50%;
+  background: #fff;
 }
 
 .team-crest.large {
@@ -989,13 +996,33 @@ main {
 .team-crest.small {
   width: 30px;
   height: 30px;
-  border-radius: 8px;
 }
 
 .team-crest img {
+  position: absolute;
+  inset: 4%;
+  width: 92%;
+  height: 92%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
+.team-crest[data-team-id='moonlight-knights'] img,
+.team-crest[data-team-id='rising-union'] img {
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+}
+
+.team-crest[data-team-id='international'] img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.12);
 }
 
 .team-crest-placeholder {

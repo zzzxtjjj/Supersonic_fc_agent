@@ -1,7 +1,5 @@
 import { useEffect, useState, type DragEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { PageHeader } from '../components/layout/PageHeader'
-import { adminAuth } from '../services/adminAuth'
+import { adminData } from '../services/adminData'
 import { mediaData } from '../services/mediaData'
 import type {
   MediaCategory,
@@ -26,7 +24,7 @@ const categories: { value: MediaCategory; label: string }[] = [
 const acceptedExtensions = /\.(?:jpe?g|png|webp)$/i
 
 export function MediaAdminPage() {
-  const navigate = useNavigate()
+  const [availableSeasons, setAvailableSeasons] = useState<string[]>([])
   const [category, setCategory] = useState<MediaCategory>('team_group')
   const [season, setSeason] = useState<Season | ''>('25-26')
   const [options, setOptions] = useState<MediaOptions | null>(null)
@@ -49,6 +47,15 @@ export function MediaAdminPage() {
   const [avatarNotice, setAvatarNotice] = useState<string | null>(null)
   const [avatarError, setAvatarError] = useState<string | null>(null)
   const [mediaRevision, setMediaRevision] = useState(0)
+
+  useEffect(() => {
+    adminData.getSeasons().then((items) => {
+      setAvailableSeasons(items)
+      setSeason((current) => current && items.includes(current) ? current : (items.at(-1) ?? ''))
+    }).catch((requestError: unknown) => {
+      setError(requestError instanceof Error ? requestError.message : '无法读取赛季')
+    })
+  }, [])
 
   useEffect(() => {
     if (!season) {
@@ -263,23 +270,14 @@ export function MediaAdminPage() {
     }
   }
 
-  async function logout() {
-    try {
-      await adminAuth.logout()
-    } finally {
-      navigate('/admin/login', { replace: true })
-    }
-  }
-
   return (
-    <div className="page">
-      <section className="content-wrap media-admin">
-        <PageHeader
-          eyebrow="LOCAL MEDIA ADMIN"
-          title="媒体上传"
-          description="只按赛季管理球员照片、球队合照和球队队徽。"
-          aside={<button className="admin-logout" type="button" onClick={logout}>退出管理</button>}
-        />
+    <div className="media-admin-page">
+      <section className="media-admin">
+        <header className="admin-page-header">
+          <p className="section-kicker">MEDIA LIBRARY</p>
+          <h1>媒体与头像</h1>
+          <p>只按赛季管理球员照片、球队合照和球队队徽。</p>
+        </header>
 
         <section className="avatar-manager" aria-labelledby="avatar-manager-title">
           <div className="avatar-manager-heading">
@@ -384,8 +382,7 @@ export function MediaAdminPage() {
               <label>
                 <span>Season</span>
                 <select value={season} onChange={(event) => setSeason(event.target.value as Season | '')}>
-                  <option value="25-26">25-26</option>
-                  <option value="26-27">26-27</option>
+                  {availableSeasons.map((item) => <option key={item} value={item}>{item}</option>)}
                 </select>
               </label>
 

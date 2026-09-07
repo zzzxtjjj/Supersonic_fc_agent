@@ -1,12 +1,14 @@
 import { useState, type ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import { usePlayerAuth } from '../../contexts/PlayerAuthContext'
+import { PlayerAvatar } from '../players/PlayerAvatar'
 
 const navItems = [
-  { to: '/ai', label: 'AI Assistant' },
-  { to: '/gallery', label: '照片集' },
   { to: '/matches', label: '比赛' },
-  { to: '/players', label: '球员' },
   { to: '/stats', label: '数据' },
+  { to: '/ai', label: 'AI' },
+  { to: '/gallery', label: '照片集' },
+  { to: '/ratings', label: '评分' },
 ]
 
 interface AppShellProps {
@@ -15,6 +17,7 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { session, loading, logout } = usePlayerAuth()
 
   return (
     <div className="app-shell">
@@ -52,6 +55,14 @@ export function AppShell({ children }: AppShellProps) {
               >
                 {item.label}
               </NavLink>
+            ))}
+            {!loading && (session ? (
+              <details className="player-nav-account">
+                <summary><PlayerAvatar name={session.user.name} avatarUrl={session.user.photoUrl} size="tiny" /><span>{session.user.name}</span></summary>
+                <div><strong>已认证超音速球员</strong><button type="button" onClick={() => logout()}>退出登录</button></div>
+              </details>
+            ) : (
+              <NavLink className="player-login-nav" to="/player/login" onClick={() => setMenuOpen(false)}>球员登录</NavLink>
             ))}
           </nav>
         </div>

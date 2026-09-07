@@ -6,6 +6,7 @@ import { TeamCrest } from '../components/teams/TeamCrest'
 import { SeasonSelector } from '../components/SeasonSelector'
 import { seasonData } from '../services/seasonData'
 import type { RankingEntry, Season, Standing } from '../types'
+import { Link } from 'react-router-dom'
 
 export function StatsPage() {
   const [season, setSeason] = useState<Season>('25-26')
@@ -54,6 +55,7 @@ export function StatsPage() {
           description="聚合联赛排名与球队内部数据；只展示当前已确认的信息。"
           aside={<SeasonSelector value={season} onChange={setSeason} />}
         />
+        <Link className="squad-data-link" to="/players">查看 {season} 赛季完整球员名单 →</Link>
 
         {loading ? <EmptyState label="正在加载赛季统计数据…" /> : null}
         {!loading && error ? (

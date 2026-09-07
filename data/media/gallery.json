@@ -664,5 +664,149 @@
     "date": null,
     "sort_order": null,
     "created_at": "2026-09-05T02:35:26.495613+00:00"
+  },
+  {
+    "id": "media-fe80a699a1f04a029e72d4f54b75c9ec",
+    "type": "player",
+    "url": "/media/player/media-fe80a699a1f04a029e72d4f54b75c9ec.jpg",
+    "original_name": "8e3547b0557ac1c900ddbf0313f6a190.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "li-yunfan"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:47:38.418056+00:00"
+  },
+  {
+    "id": "media-1141f3a10d86410690d30551b6248170",
+    "type": "player",
+    "url": "/media/player/media-1141f3a10d86410690d30551b6248170.jpg",
+    "original_name": "90a1174b19b60d44ef019441e989b3ba.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "he-bolin"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:48:04.392020+00:00"
+  },
+  {
+    "id": "media-cc5b6d36b4a54b2e97b9a0f6386b3163",
+    "type": "player",
+    "url": "/media/player/media-cc5b6d36b4a54b2e97b9a0f6386b3163.jpg",
+    "original_name": "c34036145947934e758d5ae60a5de98c.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "ouyang-kang"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.576621+00:00"
+  },
+  {
+    "id": "media-49ce4a9c4ffc47e38c25a1916f61ef82",
+    "type": "player",
+    "url": "/media/player/media-49ce4a9c4ffc47e38c25a1916f61ef82.jpg",
+    "original_name": "75e7e24d813fe927130181720a32b2eb.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "ouyang-kang"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.577589+00:00"
+  },
+  {
+    "id": "media-ed004fadd1e04df18db2fb13c173d1e5",
+    "type": "player",
+    "url": "/media/player/media-ed004fadd1e04df18db2fb13c173d1e5.jpg",
+    "original_name": "0f1e03d9f72e3cedbd6d787ec3bfa3c5.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "zhan-junjie"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.578572+00:00"
+  },
+  {
+    "id": "media-2f80213fd764414bba7040fa4e7083d1",
+    "type": "player",
+    "url": "/media/player/media-2f80213fd764414bba7040fa4e7083d1.jpg",
+    "original_name": "31a9aaf712b544e2a4a807355073c94a.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "zhan-junjie"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.578572+00:00"
+  },
+  {
+    "id": "media-644212174e7d401197327cda4a55695e",
+    "type": "player",
+    "url": "/media/player/media-644212174e7d401197327cda4a55695e.jpg",
+    "original_name": "096acdb683058cf1dc792e0696505495.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "tan-dingrui"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.579633+00:00"
+  },
+  {
+    "id": "media-cff8a634613b4d4f84f393468506cd50",
+    "type": "player",
+    "url": "/media/player/media-cff8a634613b4d4f84f393468506cd50.jpg",
+    "original_name": "3c4b7962eadc72611ea73768f31ce310.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "tan-dingrui"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.579633+00:00"
+  },
+  {
+    "id": "media-ef9aae2ef64f4c1393a3a05ed62f5b36",
+    "type": "player",
+    "url": "/media/player/media-ef9aae2ef64f4c1393a3a05ed62f5b36.jpg",
+    "original_name": "9fdc02b57b3726ff601b2057e4f4b738.jpg",
+    "season": "25-26",
+    "player_ids": [
+      "yuan-hantao"
+    ],
+    "team_id": null,
+    "title": null,
+    "caption": null,
+    "date": null,
+    "sort_order": null,
+    "created_at": "2026-09-05T12:52:45.582632+00:00"
   }
 ]

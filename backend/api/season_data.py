@@ -18,6 +18,18 @@ class SeasonDataNotFound(FileNotFoundError):
     pass
 
 
+def list_seasons() -> list[str]:
+    """Return every valid season directory currently present in the data store."""
+
+    if not SEASON_DATA_ROOT.is_dir():
+        return []
+    return [
+        season_dir.name
+        for season_dir in sorted(SEASON_DATA_ROOT.iterdir())
+        if season_dir.is_dir() and _SEASON_PATTERN.fullmatch(season_dir.name)
+    ]
+
+
 def load_season_file(season: str, filename: str) -> dict[str, Any]:
     if not _SEASON_PATTERN.fullmatch(season):
         raise SeasonDataNotFound(f"Season not found: {season}")
@@ -73,6 +85,45 @@ def calculate_player_goal_totals(
             player_id = scorer.get("player_id")
             if player_id:
                 totals[player_id] += scorer["goals"]
+    return dict(totals)
+
+
+def calculate_match_player_stats(match: dict[str, Any]) -> dict[str, dict[str, int]]:
+    """Derive confirmed Supersonic goals and assists for one match."""
+
+    totals: dict[str, dict[str, int]] = defaultdict(
+        lambda: {"goals": 0, "assists": 0}
+    )
+    if "events" in match:
+        for event in match.get("events") or []:
+            if event.get("type") != "goal" or event.get("team_id") != SUPERSONIC_TEAM_ID:
+                continue
+            scorer_id = event.get("player_id") or event.get("scorer_player_id")
+            if scorer_id:
+                totals[scorer_id]["goals"] += 1
+            assist_id = event.get("assist_player_id")
+            if assist_id:
+                totals[assist_id]["assists"] += 1
+    else:
+        for scorer in match.get("scorers", []):
+            if scorer.get("type") != "player" or not scorer.get("player_id"):
+                continue
+            totals[scorer["player_id"]]["goals"] += int(scorer.get("goals", 0))
+    return dict(totals)
+
+
+def calculate_season_player_stats(
+    matches: list[dict[str, Any]],
+) -> dict[str, dict[str, int]]:
+    """Aggregate confirmed match facts without inventing missing assists."""
+
+    totals: dict[str, dict[str, int]] = defaultdict(
+        lambda: {"goals": 0, "assists": 0}
+    )
+    for match in matches:
+        for player_id, facts in calculate_match_player_stats(match).items():
+            totals[player_id]["goals"] += facts["goals"]
+            totals[player_id]["assists"] += facts["assists"]
     return dict(totals)
 
 
@@ -186,14 +237,19 @@ def public_player_season(
     }
 
 
-def find_match(match_id: str) -> dict[str, Any] | None:
-    for season_dir in sorted(SEASON_DATA_ROOT.iterdir()):
-        if not season_dir.is_dir() or not _SEASON_PATTERN.fullmatch(season_dir.name):
-            continue
-        matches = load_matches(season_dir.name)
+def find_match_record(match_id: str) -> dict[str, Any] | None:
+    for season in list_seasons():
+        matches = load_matches(season)
         match = next((item for item in matches if item["id"] == match_id), None)
         if match is not None:
-            return public_match(match, team_map(season_dir.name))
+            return match
+    return None
+
+
+def find_match(match_id: str) -> dict[str, Any] | None:
+    match = find_match_record(match_id)
+    if match is not None:
+        return public_match(match, team_map(match["season"]))
     return None
 
 
@@ -201,10 +257,7 @@ def find_player(player_id: str) -> dict[str, Any] | None:
     identity: dict[str, Any] | None = None
     seasons: list[dict[str, Any]] = []
 
-    for season_dir in sorted(SEASON_DATA_ROOT.iterdir()):
-        if not season_dir.is_dir() or not _SEASON_PATTERN.fullmatch(season_dir.name):
-            continue
-        season = season_dir.name
+    for season in list_seasons():
         player = next(
             (item for item in load_players(season) if item["id"] == player_id),
             None,

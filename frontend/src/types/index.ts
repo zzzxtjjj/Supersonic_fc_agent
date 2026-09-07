@@ -1,4 +1,4 @@
-export type Season = '25-26' | '26-27'
+export type Season = string
 
 export type PlayerStatus = 'active' | 'inactive' | null
 

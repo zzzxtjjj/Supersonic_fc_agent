@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from backend.api.season_data import (
     SeasonDataNotFound,
+    calculate_season_player_stats,
     calculate_scorer_ranking,
     load_matches,
     load_players,
@@ -58,10 +59,26 @@ async def get_scorers(
 
 @router.get("/assists", response_model=AssistsResponse)
 async def get_assists(season: str) -> AssistsResponse:
-    """No assists source exists yet, so no values are inferred."""
+    """Derive confirmed assists from match events without filling unknown assists."""
 
     try:
-        load_matches(season)
+        matches = load_matches(season)
+        players = load_players(season)
     except SeasonDataNotFound as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc))
-    return AssistsResponse(season=season)
+    totals = calculate_season_player_stats(matches)
+    players_by_id = {player["id"]: player for player in players}
+    ranked = [
+        {
+            "player_id": player_id,
+            "player_name": players_by_id[player_id]["name"],
+            "assists": values["assists"],
+        }
+        for player_id, values in totals.items()
+        if values["assists"] > 0 and player_id in players_by_id
+    ]
+    ranked.sort(key=lambda item: (-item["assists"], item["player_id"]))
+    return AssistsResponse(
+        season=season,
+        items=[{"rank": index, **item} for index, item in enumerate(ranked, 1)],
+    )

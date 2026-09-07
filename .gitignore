@@ -10,3 +10,7 @@ frontend/dist/
 backend/static/uploads/
 
 evals/reports/
+data/app.db
+.venv/
+*.log
+frontend/dist/

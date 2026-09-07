@@ -8,7 +8,7 @@
         "年轻人",
         "年轻人队"
       ],
-      "crest_url": null
+      "crest_url": "/team-crests/youngsters.png"
     },
     {
       "id": "rising-union",
@@ -16,7 +16,7 @@
       "aliases": [
         "崛起联"
       ],
-      "crest_url": null
+      "crest_url": "/team-crests/rising-union.jpg"
     },
     {
       "id": "moonlight-knights",
@@ -24,7 +24,7 @@
       "aliases": [
         "月光骑士"
       ],
-      "crest_url": null
+      "crest_url": "/team-crests/moonlight-knights.png"
     },
     {
       "id": "supersonic",
@@ -33,7 +33,7 @@
         "超音速",
         "Supersonic FC"
       ],
-      "crest_url": "/supersonic-logo.png"
+      "crest_url": "/team-crests/supersonic.png"
     },
     {
       "id": "skywalkers",
@@ -42,7 +42,7 @@
         "天行者",
         "天行者队"
       ],
-      "crest_url": null
+      "crest_url": "/team-crests/skywalkers.png"
     },
     {
       "id": "round-table-knights",
@@ -52,7 +52,7 @@
         "中桌 FC",
         "中桌 FC（圆桌骑士）"
       ],
-      "crest_url": "/media/team/media-308b3021858848ad9c9e02b1875b01fe.jpg"
+      "crest_url": "/team-crests/round-table-knights.png"
     },
     {
       "id": "international",
@@ -61,7 +61,7 @@
         "国际",
         "诺丁汉国际队"
       ],
-      "crest_url": null
+      "crest_url": "/team-crests/international.jpg"
     },
     {
       "id": "destiny",
@@ -70,7 +70,7 @@
         "命运",
         "命运队"
       ],
-      "crest_url": "/media/team/media-1dcece0644ca4e0da4959966cdac5e10.jpg"
+      "crest_url": "/team-crests/destiny.png"
     }
   ]
 }
