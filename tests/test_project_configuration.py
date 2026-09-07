@@ -19,7 +19,9 @@ def test_env_example_declares_required_names_without_real_credentials() -> None:
         values[key] = value
 
     assert set(values) == {
-        "DEEPSEEK_API_KEY",
+        "LLM_API_KEY",
+        "LLM_BASE_URL",
+        "LLM_MODEL",
         "ADMIN_USERNAME",
         "ADMIN_PASSWORD_HASH",
         "SESSION_SECRET",
@@ -31,7 +33,11 @@ def test_env_example_declares_required_names_without_real_credentials() -> None:
         "MEDIA_DATA_ROOT",
         "MEDIA_UPLOAD_ROOT",
     }
-    assert values["DEEPSEEK_API_KEY"] == ""
+    assert values["LLM_API_KEY"] == ""
+    assert values["LLM_BASE_URL"] == (
+        "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    )
+    assert values["LLM_MODEL"] == "qwen-flash"
     assert values["ADMIN_PASSWORD_HASH"] == ""
     assert values["SESSION_SECRET"] == ""
     assert values["FRONTEND_ORIGIN"] == ""

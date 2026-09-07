@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { PageHeader } from '../components/layout/PageHeader'
 import { agentData } from '../services/agentData'
+import { createRequestId } from '../utils/createRequestId'
 
 interface ChatMessage {
   id: string
@@ -42,7 +43,7 @@ export function AgentPage() {
 
     if (!content || sending) return
 
-    const requestId = crypto.randomUUID()
+    const requestId = createRequestId()
     setMessages((current) => [
       ...current,
       { id: `user-${requestId}`, role: 'user', content },

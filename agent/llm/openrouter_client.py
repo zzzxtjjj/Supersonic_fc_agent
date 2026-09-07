@@ -7,14 +7,41 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+DEFAULT_LLM_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+DEFAULT_LLM_MODEL = "qwen-flash"
+LEGACY_DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+LEGACY_DEEPSEEK_MODEL = "deepseek-v4-flash"
 
-DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
+
+def _get_llm_config() -> tuple[str, str, str]:
+    configured_key = os.getenv("LLM_API_KEY")
+    legacy_key = os.getenv("DEEPSEEK_API_KEY")
+    api_key = configured_key or legacy_key
+
+    if not api_key:
+        raise ValueError("LLM_API_KEY is not configured.")
+
+    use_legacy_defaults = not configured_key and bool(legacy_key)
+    base_url = os.getenv("LLM_BASE_URL") or (
+        LEGACY_DEEPSEEK_BASE_URL
+        if use_legacy_defaults
+        else DEFAULT_LLM_BASE_URL
+    )
+    model = os.getenv("LLM_MODEL") or (
+        LEGACY_DEEPSEEK_MODEL if use_legacy_defaults else DEFAULT_LLM_MODEL
+    )
+    return api_key, base_url.rstrip("/"), model
+
+
+def _chat_completions_url(base_url: str) -> str:
+    if base_url.endswith("/chat/completions"):
+        return base_url
+    return f"{base_url}/chat/completions"
 
 
 def call_llm(messages: list, tools: list | None = None) -> dict:
     """
-    调用 DeepSeek LLM。
+    调用 OpenAI-compatible Chat Completions API。
 
     messages:
         对话消息列表
@@ -23,16 +50,15 @@ def call_llm(messages: list, tools: list | None = None) -> dict:
         提供给模型的 Tool Schema 列表
     """
 
-    if not DEEPSEEK_API_KEY:
-        raise ValueError("DEEPSEEK_API_KEY is not configured.")
+    api_key, base_url, model = _get_llm_config()
 
     headers = {
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
 
     payload = {
-        "model": "deepseek-v4-flash",
+        "model": model,
         "messages": messages,
     }
 
@@ -40,7 +66,7 @@ def call_llm(messages: list, tools: list | None = None) -> dict:
         payload["tools"] = tools
 
     response = requests.post(
-        DEEPSEEK_URL,
+        _chat_completions_url(base_url),
         headers=headers,
         json=payload,
         timeout=60,

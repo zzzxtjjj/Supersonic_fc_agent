@@ -45,7 +45,7 @@ Deployment V1 uses one Docker service and one persistent volume:
 Browser (HTTPS)
   -> FastAPI + compiled React frontend (one origin)
        -> LangGraph Agent
-            -> OpenRouter
+            -> OpenAI-compatible LLM provider (Qwen Flash by default)
             -> local BGE embedding and reranker models
        -> persistent season/media JSON and uploaded images
 ```
@@ -64,7 +64,9 @@ Configure these through the platform secret/environment interface. Do not put
 their values in Git, the Dockerfile, or frontend `VITE_*` variables.
 
 ```text
-DEEPSEEK_API_KEY
+LLM_API_KEY
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+LLM_MODEL=qwen-flash
 ADMIN_USERNAME
 ADMIN_PASSWORD_HASH
 SESSION_SECRET
@@ -74,6 +76,10 @@ SEASON_DATA_ROOT=/app/persistent/seasons
 MEDIA_DATA_ROOT=/app/persistent/media
 MEDIA_UPLOAD_ROOT=/app/persistent/uploads
 ```
+
+`LLM_API_KEY` is a backend-only secret. The default URL uses Alibaba Cloud
+Bailian's OpenAI-compatible endpoint; changing `LLM_BASE_URL` and `LLM_MODEL`
+switches providers without changing the Agent workflow.
 
 `SESSION_SECRET` must contain at least 32 characters. Generate the administrator
 password hash and session secret locally with:
@@ -138,7 +144,7 @@ current Railway price and resource limits before creating resources.
 ## Health and logging
 
 `GET /api/health` returns only `{"status": "ok"}` and does not initialize the
-Agent, OpenRouter, embedding model, or reranker.
+Agent, LLM provider, embedding model, or reranker.
 
 HTTP logging contains method, path, status, and latency. It does not log request
 bodies, passwords, cookies, authorization headers, model reasoning, system
@@ -164,7 +170,7 @@ the frontend controls is not the authorization boundary.
   restart.
 - The local embedding and reranker models increase image size, RAM use, and cold
   start latency.
-- The Agent depends on OpenRouter availability and rate limits.
+- The Agent depends on the configured LLM provider's availability and rate limits.
 - Chat responses are not streamed.
 - PostgreSQL and Redis are not connected yet.
 - Evaluation V1 semantic and groundedness coverage remains intentionally
