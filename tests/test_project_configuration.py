@@ -22,6 +22,10 @@ def test_env_example_declares_required_names_without_real_credentials() -> None:
         "LLM_API_KEY",
         "LLM_BASE_URL",
         "LLM_MODEL",
+        "EMBEDDING_MODEL_PATH",
+        "RERANKER_MODEL_PATH",
+        "HF_HUB_OFFLINE",
+        "TRANSFORMERS_OFFLINE",
         "ADMIN_USERNAME",
         "ADMIN_PASSWORD_HASH",
         "SESSION_SECRET",
@@ -38,6 +42,10 @@ def test_env_example_declares_required_names_without_real_credentials() -> None:
         "https://dashscope.aliyuncs.com/compatible-mode/v1"
     )
     assert values["LLM_MODEL"] == "qwen-flash"
+    assert values["EMBEDDING_MODEL_PATH"] == ""
+    assert values["RERANKER_MODEL_PATH"] == ""
+    assert values["HF_HUB_OFFLINE"] == "0"
+    assert values["TRANSFORMERS_OFFLINE"] == "0"
     assert values["ADMIN_PASSWORD_HASH"] == ""
     assert values["SESSION_SECRET"] == ""
     assert values["FRONTEND_ORIGIN"] == ""

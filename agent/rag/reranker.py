@@ -1,18 +1,61 @@
+import inspect
+import os
+from pathlib import Path
+
 from agent.rag.hybrid_retriever import hybrid_search
 
 
 RERANKER_MODEL_NAME = "BAAI/bge-reranker-base"
+RERANKER_MODEL_PATH_ENV = "RERANKER_MODEL_PATH"
+OFFLINE_ENV_VARS = ("HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE")
 
 _reranker = None
+
+
+def _model_source() -> tuple[str, bool]:
+    configured_path = os.getenv(RERANKER_MODEL_PATH_ENV, "").strip()
+    if not configured_path:
+        return RERANKER_MODEL_NAME, False
+
+    model_path = Path(configured_path).expanduser()
+    if not model_path.is_dir():
+        raise FileNotFoundError(
+            f"{RERANKER_MODEL_PATH_ENV} does not point to a model directory: "
+            f"{model_path}"
+        )
+
+    return str(model_path), True
+
+
+def _supports_local_files_only(model_class: type) -> bool:
+    try:
+        return "local_files_only" in inspect.signature(model_class).parameters
+    except (TypeError, ValueError):
+        return False
+
+
+def _offline_mode_enabled() -> bool:
+    true_values = {"1", "true", "yes", "on"}
+    return any(
+        os.getenv(name, "").strip().lower() in true_values
+        for name in OFFLINE_ENV_VARS
+    )
 
 
 def get_reranker():
     global _reranker
 
     if _reranker is None:
+        model_source, is_local_path = _model_source()
+
         from sentence_transformers import CrossEncoder
 
-        _reranker = CrossEncoder(RERANKER_MODEL_NAME)
+        kwargs = {}
+        local_only = is_local_path or _offline_mode_enabled()
+        if local_only and _supports_local_files_only(CrossEncoder):
+            kwargs["local_files_only"] = True
+
+        _reranker = CrossEncoder(model_source, **kwargs)
 
     return _reranker
 
