@@ -11,7 +11,6 @@ The main Agent workflow, RAG pipeline, web application, authentication, media ma
 ## Live Deployment
 
 - Web Application: **To be added**
-- API Documentation: **To be added**
 
 ## Overview
 
