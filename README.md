@@ -1,139 +1,224 @@
 # Supersonic FC Agent
 
-A domain-specific AI agent and web platform for querying, maintaining, and presenting Supersonic FC team knowledge.
+A domain-specific AI agent and full-stack platform for querying, maintaining, and presenting Supersonic FC team knowledge.
 
 ## Status
 
-**Stable Alpha** — the end-to-end product path is implemented and has been deployed on a small Ubuntu server. The project remains a team-scale system rather than a general-purpose sports platform.
+**Stable Alpha**
+
+The main Agent workflow, RAG pipeline, web application, authentication, media management, and evaluation infrastructure are implemented.
+
+## Live Deployment
+
+- Web Application: **To be added**
+- API Documentation: **To be added**
 
 ## Overview
 
-Supersonic FC Agent combines a LangGraph workflow, deterministic Python tools, a local hybrid RAG pipeline, FastAPI, and a React frontend. It answers exact questions such as player goals and match results from structured season data, while retrieving narrative knowledge such as player characteristics and team stories from a curated knowledge base.
+Supersonic FC Agent combines:
 
-The project also includes media administration, player activation and login, match ratings, comments and likes, offline evaluation infrastructure, and deployment configuration. Official team facts remain separate from user-generated community data.
+- LangGraph agent orchestration
+- Structured Python tools
+- Hybrid retrieval-augmented generation
+- Grounding and evidence verification
+- FastAPI backend
+- React and TypeScript frontend
+- Player authentication and match ratings
+- Agent evaluation infrastructure
+
+Exact facts such as player goals, shirt numbers, match results, and scorer rankings are resolved through structured tools.
+
+Narrative questions about player characteristics, tactics, team culture, and match stories use a curated RAG knowledge base.
 
 ## Motivation
 
-Sports knowledge mixes exact records with narrative context. A language model may produce plausible but unsupported names, scores, or statistics if it is allowed to answer directly. This project explores a practical agent architecture in which exact facts are resolved through structured tools, descriptive knowledge is retrieved through RAG, and program-level workflow checks prevent unsupported team-fact answers from terminating successfully.
+A language model may generate plausible but unsupported names, scores, or statistics when answering from memory.
 
-It is an applied agent-workflow project, not a claim of a novel agent algorithm or a general sports intelligence system.
+This project separates structured facts from semantic retrieval and uses program-level verification before accepting factual answers.
+
+It is an applied agent-engineering project rather than a claim of a novel agent algorithm.
 
 ## Agent Workflow
 
 ```mermaid
 flowchart TD
-    U[User question] --> L[LLM node]
-    L -->|tool call| T[Tool node]
-    T --> X[Execution verification]
-    X -->|passed| E[Evidence verification]
-    X -->|recoverable failure| R[Recovery]
-    X -->|unknown player| C[Clarify]
-    X -->|unrecoverable| A[Abort]
+    U[User Question] --> L[LLM Node]
+
+    L -->|Tool Call| T[Tool Execution]
+    T --> X[Execution Verification]
+
+    X -->|Passed| E[Evidence Verification]
+    X -->|Recoverable Failure| R[Recovery]
+    X -->|Unknown Entity| C[Clarify]
+    X -->|Unrecoverable Failure| A[Abort]
+
     R --> L
-    E -->|supported| L
-    E -->|insufficient| I[Evidence-insufficient answer]
-    L -->|verified final answer| END[End]
-    L -->|unsupported team fact| G[Grounding recovery]
+
+    E -->|Supported| L
+    E -->|Insufficient| I[Evidence-Insufficient Response]
+
+    L -->|Verified Answer| END[End]
+    L -->|Unsupported Team Fact| G[Grounding Recovery]
     G --> L
 ```
 
-The production entry point is `agent.workflow.run_graph.run_graph_agent`. FastAPI invokes this function rather than calling the model provider directly. The older loop under `agent/core/` is retained as an earlier implementation path; the product API uses the LangGraph workflow.
+The production Agent entry point is:
 
-## Implemented Features
-
-### Agent and grounding
-
-- LangGraph state with explicit tool, verification, recovery, clarification, abort, and grounding-recovery paths
-- OpenAI-compatible chat-completions client with configurable provider, base URL, model, and tool calling
-- Structured tools for player goals, player profile, shirt number, scorer ranking, and match results
-- RAG tool for player characteristics, tactics, team history, and other narrative knowledge
-- Deterministic execution checks and tool-specific evidence checks
-- Grounding gate that rejects direct, unsupported answers to team-fact questions
-- Separate handling for greetings and assistant-meta questions that do not require a tool
-- Bounded tool and recovery retries to avoid infinite loops
-
-### Retrieval
-
-- Curated JSON chunks with season and entity metadata
-- Chinese BM25 retrieval and dense retrieval with `BAAI/bge-small-zh-v1.5`
-- Reciprocal Rank Fusion for hybrid candidate ranking
-- Cross-encoder reranking with `BAAI/bge-reranker-base`
-- Prebuilt local dense index and offline model-loading support for deployment
-
-### Product application
-
-- FastAPI endpoints for agent chat, players, matches, standings, scorer and assist tables, gallery media, ratings, and authentication
-- React 19 and TypeScript frontend for team data, AI chat, media, and match ratings
-- Single-administrator authentication with backend-enforced write permissions
-- Player invite activation, login, and persistent server-side sessions
-- Player ratings, comments, and likes backed by SQLite
-- Bulk image upload with explicit player-avatar and team-crest assignment
-- Dataset validation, RAG acceptance checks, unit tests, and agent evaluation reports
-
-## Architecture
-
-```text
-React frontend
-    │ HTTP / JSON
-    ▼
-FastAPI
-    ├── public team-data APIs
-    ├── admin and player authentication
-    ├── rating and community APIs
-    └── LangGraph product entry point
-            ├── structured tools → season JSON
-            └── RAG tool → BM25 + dense retrieval → RRF → reranker
+```python
+agent.workflow.run_graph.run_graph_agent
 ```
 
-### Data boundaries
+FastAPI invokes the LangGraph workflow instead of calling the LLM provider directly.
 
-- `data/seasons/` is the versioned source of truth for official players, matches, teams, standings, and season status.
-- `data/rag/` contains curated narrative chunks and the prebuilt dense index.
-- `data/app.db` stores mutable authentication, rating, comment, and like data and is excluded from Git.
-- `backend/static/uploads/` contains runtime uploads and is excluded from Git.
+## Grounding and Verification
 
-Exact statistics are read or derived from structured season records. The frontend does not maintain a separate player, match, ranking, or gallery dataset.
+The workflow uses three safeguards.
+
+### Execution Verification
+
+Checks whether a tool executed successfully and returned a valid result.
+
+### Evidence Verification
+
+Checks whether the tool result supports the requested player, season, match, or fact.
+
+### Grounding Gate
+
+A factual Supersonic FC answer cannot end while evidence is still pending.
+
+If the LLM answers a team-fact question without calling a tool, the workflow rejects the unsupported answer and enters grounding recovery.
+
+Greetings and assistant-meta questions can still be answered directly.
+
+## Implemented Tools
+
+- `get_player_goals`
+- `get_player_profile`
+- `get_player_number`
+- `get_scorer_ranking`
+- `get_match_result`
+- `search_team_knowledge`
+
+Structured tools handle exact facts. The RAG tool handles qualitative and narrative knowledge.
+
+## RAG Pipeline
+
+```text
+Metadata Filtering
+        ↓
+Dense Retrieval + BM25
+        ↓
+Reciprocal Rank Fusion
+        ↓
+Cross-Encoder Reranking
+        ↓
+Relevant Knowledge Chunks
+```
+
+Models currently used:
+
+- Embedding: `BAAI/bge-small-zh-v1.5`
+- Reranker: `BAAI/bge-reranker-base`
+
+BM25 improves exact-name and keyword matching. Dense retrieval improves semantic recall. Reciprocal Rank Fusion combines both rankings before final reranking.
+
+## System Architecture
+
+```text
+React Frontend
+       │
+       ▼
+FastAPI Backend
+       │
+       ▼
+LangGraph Agent
+   ├── Structured Tools → Season JSON
+   └── RAG Tool → Curated Knowledge Base
+```
+
+Additional backend modules provide:
+
+- Public team-data APIs
+- Administrator authentication
+- Player activation and login
+- Media management
+- Match ratings
+- Comments and likes
+
+## Data Design
+
+The project separates official team facts from mutable application data.
+
+```text
+data/seasons/     Official players, matches, teams and standings
+data/rag/         Knowledge chunks and dense index
+data/app.db       Authentication, ratings, comments and likes
+data/media/       Media metadata
+```
+
+Runtime uploads and the SQLite database are excluded from Git.
+
+## Product Features
+
+### Public website
+
+- Match results
+- Season rosters
+- Player profiles
+- Standings and rankings
+- Photo gallery
+- AI Assistant
+- Match rating pages
+
+### Administration
+
+- Backend-enforced administrator permissions
+- Player and match data maintenance
+- Bulk image uploads
+- Explicit player-avatar selection
+- Team crest management
+- Player invitation generation
+
+### Player community
+
+- Invitation-based account activation
+- Player login
+- Match ratings
+- Comments
+- Rating and comment likes
+- Season-specific rating permissions
 
 ## Project Structure
 
 ```text
 agent/
-  workflow/       LangGraph state, nodes, routing, and product runner
-  tools/          structured team tools and the RAG tool
-  rag/            BM25, dense retrieval, fusion, and reranking
-  llm/            configurable OpenAI-compatible client
+├── workflow/       LangGraph state, nodes and routing
+├── tools/          Structured tools and RAG tool
+├── rag/            Retrieval and reranking
+└── llm/            OpenAI-compatible LLM client
+
 backend/
-  api/            FastAPI route modules
-  ratings/        SQLite schema, repository, service, and seed logic
-frontend/         React and TypeScript application
-data/
-  seasons/        official season data
-  rag/            chunks and dense index
-  media/          versioned media metadata seed
-evals/            datasets, runner, trace adapter, evaluator, and reports
-scripts/          data validation and dense-index build commands
-tests/            offline unit and integration tests
-docs/             API, data-maintenance, architecture, and deployment notes
+├── api/            FastAPI endpoints
+├── ratings/        Rating and community data layer
+└── main.py         Backend application entry point
+
+frontend/           React and TypeScript application
+data/               Season, RAG and media data
+evals/              Agent evaluation infrastructure
+tests/              Offline tests
+docs/               Detailed architecture and deployment documentation
 ```
 
-## Setup
+## Quick Start
 
-Python 3.11 and Node.js 20 are recommended.
+Install backend dependencies:
 
 ```bash
-git clone https://github.com/zzzxtjjj/Supersonic_fc_agent.git
-cd Supersonic_fc_agent
-
 python -m venv .venv
-```
-
-Activate the environment, then install the backend dependencies:
-
-```bash
 python -m pip install -r requirements.txt
 ```
 
-Copy `.env.example` to a local `.env` and provide backend-only values. At minimum, live agent calls require:
+Copy `.env.example` to `.env` and configure the LLM provider:
 
 ```dotenv
 LLM_API_KEY=your_key_here
@@ -141,131 +226,126 @@ LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
 LLM_MODEL=qwen-flash
 ```
 
-Administrator access additionally requires `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, and a `SESSION_SECRET` of at least 32 characters. Generate values locally with:
-
-```bash
-python -m backend.auth_cli hash-password
-python -m backend.auth_cli generate-secret
-```
-
-Do not commit `.env`, `data/app.db`, or uploaded media.
-
-Install the frontend dependencies:
+Install frontend dependencies:
 
 ```bash
 cd frontend
 npm ci
-cd ..
 ```
 
-## Running the Project
-
-Start the backend from the repository root:
+Run the backend from the project root:
 
 ```bash
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Start the frontend in a second terminal:
+Run the frontend in another terminal:
 
 ```bash
 cd frontend
 npm run dev
 ```
 
-Development URLs:
+Detailed environment, authentication, and deployment instructions are available in [`docs/deployment.md`](docs/deployment.md).
 
-- Frontend: `http://127.0.0.1:5173`
-- API: `http://127.0.0.1:8000`
-- OpenAPI documentation: `http://127.0.0.1:8000/docs`
-- Health check: `http://127.0.0.1:8000/api/health`
+## Example Queries
 
-Initialize the local rating and player-auth database without overwriting existing community data:
+Structured fact:
 
-```bash
-python -m backend.ratings.seed
+```text
+张谢童甲25-26赛季进了几个球？
 ```
 
-Validate data and run the offline test suite:
+Narrative knowledge:
+
+```text
+干宸浩有什么技术特点？
+```
+
+Unknown entity safety:
+
+```text
+火星梅西25-26赛季进了几个球？
+```
+
+For an unknown player, the Agent should request clarification instead of inventing a result.
+
+## Evaluation
+
+The project includes JSONL evaluation datasets, an injectable runner, structured workflow traces, mechanical metrics, and JSON/Markdown reports.
+
+Evaluation can inspect:
+
+- Tool selection
+- Answer keywords
+- Workflow outcome
+- Tool execution status
+- Evidence status
+- Grounding recovery
+
+The evaluation trace excludes prompts, credentials, tool arguments, and model reasoning.
+
+## Testing
+
+Run the offline test suite:
 
 ```bash
-python -m scripts.validate_chunks
-python -m scripts.validate_season_data --season 25-26
-python -m scripts.validate_season_data --season 26-27
 python -m pytest
+```
 
+Build the frontend:
+
+```bash
 cd frontend
 npm run build
 ```
 
-## Example Usage
-
-### Structured fact
-
-```text
-Question: 张谢童甲25-26赛季进了几个球？
-Path: LLM → get_player_goals → execution verification → evidence verification → answer
-```
-
-### Narrative knowledge
-
-```text
-Question: 干宸浩有什么技术特点？
-Path: LLM → search_team_knowledge → hybrid retrieval and reranking → evidence verification → answer
-```
-
-### Unknown entity
-
-```text
-Question: 火星梅西25-26赛季进了几个球？
-Path: structured tool failure → deterministic clarification
-```
-
-If the model tries to answer the last question without a tool, the grounding gate routes it to recovery instead of accepting the unsupported answer.
-
-## Evaluation
-
-Evaluation cases are human-authored JSONL records. The runner accepts an injected agent callable, isolates case failures, computes mechanical metrics, and writes JSON and Markdown reports. The live adapter records a small structured trace containing tool calls and results, execution and evidence status, grounding recovery, and one workflow outcome. It does not record prompts, tool arguments, credentials, or model reasoning.
-
-Run infrastructure tests without a live model:
-
-```bash
-python -m pytest
-```
-
-A real evaluation requires an explicit `--live` flag:
-
-```bash
-python -m evals.run_eval --dataset evals/datasets/smoke.jsonl --live
-```
+Automated tests use fake or mocked external services where appropriate.
 
 ## Deployment
 
-The repository includes a multi-stage Dockerfile that builds the React frontend, installs the Python service, downloads the two RAG models at image-build time, and runs one Uvicorn worker. The documented small-server deployment uses Nginx for static files and reverse proxying, with FastAPI managed by systemd.
+The project supports:
 
-See [`docs/deployment.md`](docs/deployment.md) for environment variables, persistent storage, health checks, and release steps.
+- Ubuntu
+- FastAPI and Uvicorn
+- Nginx
+- systemd
+- Docker
+- Offline loading of local embedding and reranker models
+
+Production deployment details are documented in [`docs/deployment.md`](docs/deployment.md).
 
 ## Current Limitations
 
-- Team-fact intent detection uses deterministic domain rules and may require maintenance as query patterns expand.
-- Evidence checks validate known tool outputs and entity/season alignment; they are not a general semantic final-answer verifier.
-- `session_id` is part of the API contract, but persistent multi-turn agent memory is not implemented.
+- Team-fact intent detection currently uses deterministic domain rules.
+- Evidence verification is tool-specific rather than a general semantic verifier.
+- Persistent multi-turn Agent memory is not implemented.
 - Agent responses are non-streaming.
-- The local RAG corpus is scanned in process and is designed for the current small knowledge base, not large-scale retrieval.
-- Official data and media metadata are file-backed; the current deployment intentionally uses one application worker.
-- SQLite and in-memory administrator sessions are suitable for the current team-scale deployment, not horizontal scaling.
-- Production authentication requires HTTPS for secure cookies.
-- Evaluation V1 performs human-specified mechanical checks; semantic correctness and groundedness judging remain planned work.
+- RAG retrieval is designed for the current small knowledge base.
+- SQLite and file-backed data are intended for a small single-server deployment.
+- Horizontal scaling is not currently supported.
+- Semantic groundedness evaluation remains planned work.
 
 ## Roadmap
 
-- [ ] Add persistent, scoped multi-turn conversation memory
-- [ ] Add streaming responses and user-visible workflow progress
-- [ ] Extend final-answer evidence and semantic evaluation
-- [ ] Add HTTPS-domain deployment, automated backup, and operational monitoring
-- [ ] Migrate mutable data and sessions when multi-instance deployment is required
-- [ ] Replace linear dense retrieval if the knowledge base grows beyond the current team-scale corpus
+- [ ] Add persistent multi-turn memory
+- [ ] Add streaming responses
+- [ ] Extend final-answer semantic verification
+- [ ] Add formal HTTPS deployment links
+- [ ] Add automated backup and monitoring
+- [ ] Migrate mutable data if multi-instance deployment becomes necessary
 
-## What I Learned / Project Focus
+## Project Focus
 
-This project documents practical work on agent state machines, tool and RAG boundaries, deterministic safety routing, offline evaluation, full-stack integration, access control, data ownership, and deployment. It does not claim a novel agent architecture or autonomous decision-making beyond the implemented football-team domain.
+This repository demonstrates practical experience with:
+
+- Agent state machines
+- Tool calling
+- Retrieval-augmented generation
+- Grounding and evidence verification
+- Recovery workflows
+- Agent evaluation
+- Full-stack integration
+- Authentication and deployment
+
+It does not claim general autonomous reasoning beyond the implemented Supersonic FC domain.
